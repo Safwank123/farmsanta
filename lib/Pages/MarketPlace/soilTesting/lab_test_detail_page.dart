@@ -13,7 +13,7 @@ import '../../../themeFiles/app_typography.dart';
 
 
 class LabTestDetailPage extends StatefulWidget {
-  const LabTestDetailPage({Key? key, }) : super(key: key);
+  const LabTestDetailPage({super.key, });
 
   @override
   State<LabTestDetailPage> createState() => _LabTestDetailPageState();
@@ -23,7 +23,7 @@ class _LabTestDetailPageState extends State<LabTestDetailPage> {
   int item = 1;
   int currentIndex = 0;
   int selectedIndex = 0;
-  bool? liked = null;
+  bool? liked;
 
   @override
   Widget build(BuildContext context) {
@@ -388,7 +388,7 @@ class _LabTestDetailPageState extends State<LabTestDetailPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children:[
-                CustomText(textKey: "5"+ AppStrings.kmaway, color: AppColors.white,).p(3).box.make().color(AppColors.soilTestPrimary,).cornerRadius(5).centered(),
+                CustomText(textKey: "5${AppStrings.kmaway}", color: AppColors.white,).p(3).box.make().color(AppColors.soilTestPrimary,).cornerRadius(5).centered(),
                 CustomText(textKey: AppStrings.fromyourlocation, color: AppColors.gray, style: const TextStyle(fontSize: 1),)],
             ),
           ],

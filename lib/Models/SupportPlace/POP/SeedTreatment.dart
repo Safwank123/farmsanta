@@ -1,6 +1,5 @@
 import '../../Common/photo_model.dart';
 import 'Dosage.dart';
-import 'PopDto.dart';
 
 class SeedTreatment {
   String applicationMethod;

@@ -15,15 +15,14 @@ class CustomButtonElevated extends StatefulWidget {
   final Color textColor;
   Color buttonColor = primaryColor;
   CustomButtonElevated(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.onTap,
       this.customPrefix,
       this.customIcon,
       this.borderRadius = 40.0,
       this.textColor = Colors.white,
-      this.buttonColor = primaryColor})
-      : super(key: key);
+      this.buttonColor = primaryColor});
 
   @override
   _CustomButtonElevatedState createState() => _CustomButtonElevatedState();
@@ -33,6 +32,7 @@ class _CustomButtonElevatedState extends State<CustomButtonElevated> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      
         style: OutlinedButton.styleFrom(
           backgroundColor: widget.buttonColor,
           shape: RoundedRectangleBorder(

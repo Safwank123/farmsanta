@@ -49,7 +49,6 @@ dependencies:
   country_code_picker: ^3.0.0
   image_picker: ^1.1.2
   geolocator: ^14.0.1
-  google_maps_flutter: ^2.1.1
   dotted_border: ^3.0.1
   fl_chart: ^1.0.0
   intl: ^0.20.2 
@@ -64,6 +63,9 @@ dependencies:
   logger: ^2.6.0
   cloud_firestore: ^5.6.9
   uuid: ^4.5.1
+  flutter_map: ^8.1.1
+  latlong2: ^0.9.1
+  geocoding: ^4.0.0
 
 
 dev_dependencies:

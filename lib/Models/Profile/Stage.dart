@@ -16,8 +16,8 @@ class Stage {
       sequenceNumber: json['sequenceNumber'],
       growthStage:
           json['growthStage'] != null ? json['growthStage'] as String : null,
-      start: json['start'] != null ? json['start'].toInt() : null,
-      end: json['end'] != null ? json['end'].toInt() : null,
+      start: json['start']?.toInt(),
+      end: json['end']?.toInt(),
     );
   }
 

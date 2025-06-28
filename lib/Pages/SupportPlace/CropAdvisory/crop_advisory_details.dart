@@ -17,7 +17,7 @@ class CropAdvisoryDetailScreen extends BaseScreen {
   static const routeName = "/crop-advisory-details-screen";
   final CropAdvisoryModel model;
   int currentPageIndex;
-  CropAdvisoryDetailScreen({required this.model, this.currentPageIndex = 0});
+  CropAdvisoryDetailScreen({super.key, required this.model, this.currentPageIndex = 0});
 
   @override
   BaseScreenState<CropAdvisoryDetailScreen> createState() =>

@@ -52,32 +52,18 @@ class FertilizerCalculatorDto {
                     .map((x) => FertilizerCalculatorDetailsDto.fromJson(x))),
         createdBy:
             json["createdBy"] != null ? json["createdBy"] as String : null,
-        defaultBorronB: json["defaultBorronB"] != null
-            ? json["defaultBorronB"].toInt()
-            : null,
+        defaultBorronB: json["defaultBorronB"]?.toInt(),
         defaultFym:
-            json["defaultFYM"] != null ? json["defaultFYM"].toInt() : null,
+            json["defaultFYM"]?.toInt(),
         defaultLime:
-            json["defaultLime"] != null ? json["defaultLime"].toInt() : null,
-        defaultNitroN: json["defaultNitroN"] != null
-            ? json["defaultNitroN"].toInt()
-            : null,
-        defaultPhosphorusP: json["defaultPhosphorusP"] != null
-            ? json["defaultPhosphorusP"].toInt()
-            : null,
-        defaultPhotassiumK: json["defaultPhotassiumK"] != null
-            ? json["defaultPhotassiumK"].toInt()
-            : null,
-        defaultSulphurS: json["defaultSulphurS"] != null
-            ? json["defaultSulphurS"].toInt()
-            : null,
-        defaultVermiCompose: json["defaultVermiCompose"] != null
-            ? json["defaultVermiCompose"].toInt()
-            : null,
-        defaultZincZn: json["defaultZincZN"] != null
-            ? json["defaultZincZN"].toInt()
-            : null,
-        id: json["id"] != null ? json["id"].toInt() : null,
+            json["defaultLime"]?.toInt(),
+        defaultNitroN: json["defaultNitroN"]?.toInt(),
+        defaultPhosphorusP: json["defaultPhosphorusP"]?.toInt(),
+        defaultPhotassiumK: json["defaultPhotassiumK"]?.toInt(),
+        defaultSulphurS: json["defaultSulphurS"]?.toInt(),
+        defaultVermiCompose: json["defaultVermiCompose"]?.toInt(),
+        defaultZincZn: json["defaultZincZN"]?.toInt(),
+        id: json["id"]?.toInt(),
         territory:
             json["territory"] != null ? json["territory"] as String : null,
       );

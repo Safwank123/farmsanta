@@ -63,7 +63,7 @@ class CropAdvisoryModel {
               ? json["advisoryTagName"] as String
               : '',
           agronomyManager:
-              json["agronomyManager"] != null ? json["agronomyManager"] : false,
+              json["agronomyManager"] ?? false,
           createdBy:
               json["createdBy"] != null ? json["createdBy"] as String : '',
           createdTimestamp: json["createdTimestamp"] != null
@@ -91,7 +91,7 @@ class CropAdvisoryModel {
               ? List<String>.from(json["regions"].map((x) => x))
               : [],
           status: json["status"] != null ? json["status"] as String : '',
-          superAdmin: json["superAdmin"] != null ? json["superAdmin"] : false,
+          superAdmin: json["superAdmin"] ?? false,
           tenantId: json["tenantId"] != null ? json["tenantId"] as String : '',
           territory: json["territory"] != null
               ? List<String>.from(json["territory"].map((x) => x))
@@ -114,7 +114,7 @@ class CropAdvisoryModel {
               ? json["advisoryTagName"] as String
               : '',
           agronomyManager:
-              json["agronomyManager"] != null ? json["agronomyManager"] : false,
+              json["agronomyManager"] ?? false,
           createdBy:
               json["createdBy"] != null ? json["createdBy"] as String : '',
           createdTimestamp: json["createdTimestamp"] != null
@@ -142,7 +142,7 @@ class CropAdvisoryModel {
               ? List<String>.from(json["regions"].map((x) => x))
               : [],
           status: json["status"] != null ? json["status"] as String : '',
-          superAdmin: json["superAdmin"] != null ? json["superAdmin"] : false,
+          superAdmin: json["superAdmin"] ?? false,
           tenantId: json["tenantId"] != null ? json["tenantId"] as String : '',
           territory: json["territory"] != null
               ? List<String>.from(json["territory"].map((x) => x))

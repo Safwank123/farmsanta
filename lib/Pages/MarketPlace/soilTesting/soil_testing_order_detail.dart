@@ -30,7 +30,7 @@ import '../../../themeFiles/app_colors.dart';
 import '../../base_screen.dart';
 
 class SoilTestingOrderDetails extends BaseScreen {
-  const SoilTestingOrderDetails({Key? key}) : super(key: key);
+  const SoilTestingOrderDetails({super.key});
 
   @override
   BaseScreenState<SoilTestingOrderDetails> createState() =>

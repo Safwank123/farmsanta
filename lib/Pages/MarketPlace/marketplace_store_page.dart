@@ -89,7 +89,7 @@ class _MarketPlaceStorePageState extends BaseScreenState<MarketPlaceStorePage> {
                   children: [
                     TextButton(
                       style: ButtonStyle(
-                        side: MaterialStateProperty.all(
+                        side: WidgetStateProperty.all(
                           BorderSide(
                               color: selectedCategory == AppStrings.allProducts
                                   ? widget.isPurchase
@@ -119,7 +119,7 @@ class _MarketPlaceStorePageState extends BaseScreenState<MarketPlaceStorePage> {
                         i++)
                       TextButton(
                         style: ButtonStyle(
-                          side: MaterialStateProperty.all(
+                          side: WidgetStateProperty.all(
                             BorderSide(
                                 color: selectedCategory ==
                                         widget.storeModel.categories[i].uuid!
@@ -297,11 +297,11 @@ class _MarketPlaceStorePageState extends BaseScreenState<MarketPlaceStorePage> {
               bottom: 5,
               child: TextButton.icon(
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(Size(width * 0.3, 10)),
-                  side: MaterialStateProperty.all(
+                  fixedSize: WidgetStateProperty.all(Size(width * 0.3, 10)),
+                  side: WidgetStateProperty.all(
                       BorderSide(color: AppColors.primary)),
-                  iconSize: MaterialStateProperty.all(12),
-                  backgroundColor: MaterialStateProperty.all(AppColors.white),
+                  iconSize: WidgetStateProperty.all(12),
+                  backgroundColor: WidgetStateProperty.all(AppColors.white),
                 ),
                 onPressed: () {
                   // on press functionality for purchase
@@ -497,12 +497,12 @@ class _MarketPlaceStorePageState extends BaseScreenState<MarketPlaceStorePage> {
             for (int i = 0; i < productModel.variants.length; i++)
               ElevatedButton(
                 style: ButtonStyle(
-                  side: MaterialStateProperty.all(
+                  side: WidgetStateProperty.all(
                       BorderSide(color: AppColors.gray)),
                   backgroundColor:
                       selectedVariant == productModel.variants[i].variantName
-                          ? MaterialStateProperty.all(AppColors.primary)
-                          : MaterialStateProperty.all(AppColors.grayLight),
+                          ? WidgetStateProperty.all(AppColors.primary)
+                          : WidgetStateProperty.all(AppColors.grayLight),
                 ),
                 onPressed: () {
                   setState(() {

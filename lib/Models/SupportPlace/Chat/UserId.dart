@@ -7,7 +7,7 @@ class UserId {
   UserId.fromJson(Map<String, dynamic> json) {
     stringValue =
         json['stringValue'] != null ? json['stringValue'] as String : null;
-    kind = json['kind'] != null ? json['kind'] : null;
+    kind = json['kind'];
   }
 
   Map<String, dynamic> toJson() {

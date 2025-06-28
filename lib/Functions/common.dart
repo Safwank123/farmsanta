@@ -84,7 +84,7 @@ Future<String> uploadImageFunction(File? image) async {
   return "";
 }
 
-directToScreenAccordingToNotification(String title) {
+void directToScreenAccordingToNotification(String title) {
   //
   //TODO
   var page = "";
@@ -184,7 +184,7 @@ Future<String?> getOwnToken() async {
 }
 
 //function to update or create notification push token
-updateTokenNotification() async {
+Future<void> updateTokenNotification() async {
   // TODO
   // String? token = await getOwnToken();
   // bool resp = await AuthController.instance.updateField({"id": SharedHelper.id, "token": token!});

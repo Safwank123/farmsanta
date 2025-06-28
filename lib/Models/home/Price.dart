@@ -124,11 +124,11 @@ class Price {
     data['status'] = status;
     data['priceDate'] = priceDate;
     data['previousPrice'] =
-        previousPrice != null ? previousPrice!.toJson() : null;
-    data['currentPrice'] = currentPrice != null ? currentPrice!.toJson() : null;
+        previousPrice?.toJson();
+    data['currentPrice'] = currentPrice?.toJson();
     data['priceCurrency'] =
-        priceCurrency != null ? priceCurrency!.toJson() : null;
-    data['packaging'] = packaging != null ? packaging!.toJson() : null;
+        priceCurrency?.toJson();
+    data['packaging'] = packaging?.toJson();
     return data;
   }
 }

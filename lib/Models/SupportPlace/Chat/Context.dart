@@ -10,7 +10,7 @@ class Context {
   Context.fromJson(Map<String, dynamic> json) {
     name = json['name'] != null ? json['name'] as String : null;
     lifespanCount =
-        json['lifespanCount'] != null ? json['lifespanCount'].toInt() : null;
+        json['lifespanCount']?.toInt();
     parameters = json['parameters'] != null
         ? Parameters.fromJson(json['parameters'])
         : null;

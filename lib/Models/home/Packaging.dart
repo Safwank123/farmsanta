@@ -9,7 +9,7 @@ class Packaging {
 
   factory Packaging.fromJson(Map<String, dynamic> json) {
     return Packaging(
-      unit: json['unit'] != null ? json['unit']!.toDouble() : null,
+      unit: json['unit']?.toDouble(),
       uom: json['uom'] != null ? json['uom'] as String : null,
     );
   }

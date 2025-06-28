@@ -16,7 +16,7 @@ class SharedHelper {
   static int languageId = 1;
 
   //initizalize required field
-  static init() async {
+  static Future<void> init() async {
     await SharedPref.init();
 
     //fetching language from local shared data
@@ -32,13 +32,13 @@ class SharedHelper {
   }
 
   //set language received from backend
-  static setLanguage(List<LanguageModel> langs) {
+  static void setLanguage(List<LanguageModel> langs) {
     languages = langs;
     languageId = langs[getSelectedLanguage()].id;
   }
 
   //function to change language
-  static changeLanguage(int index) async {
+  static Future<void> changeLanguage(int index) async {
     String code = languages[index].lang;
     locale = Locale(code);
     await loadMap();
@@ -47,7 +47,7 @@ class SharedHelper {
   }
 
   //get language map
-  static loadMap() async {
+  static Future<void> loadMap() async {
     String jsondata = await rootBundle
         .loadString('assets/language/${locale.languageCode}.json');
     languageMap = jsonDecode(jsondata) as Map<String, dynamic>;

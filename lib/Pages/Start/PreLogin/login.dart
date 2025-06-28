@@ -20,7 +20,7 @@ import '../../base_screen.dart';
 
 class LoginScreen extends BaseScreen {
   static String routeName = '/login-screen';
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   BaseScreenState<LoginScreen> createState() => _LoginScreenState();
@@ -37,7 +37,7 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
 
     // Safely access selectedCountry
     final selectedCountry = StoreHelper.store.selectedCountry;
-    if (selectedCountry != null && selectedCountry.phoneCode != null) {
+    if (selectedCountry != null) {
       countryCode = "+${selectedCountry.phoneCode}";
     } else {
       debugPrint("⚠️ selectedCountry or phoneCode is null. Using default +237.");

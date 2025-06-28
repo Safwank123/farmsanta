@@ -35,12 +35,12 @@ class AdvisoryDetails {
       description:
           json['description'] != null ? json['description'] as String : '',
       culturalControl:
-          json['culturalControl'] != null ? json['culturalControl'] : null,
+          json['culturalControl'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['localName'] = localName;
     data['symptomsOfAttack'] = symptomsOfAttack;
     data['favourableConditions'] = favourableConditions;

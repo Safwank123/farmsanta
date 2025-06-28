@@ -13,7 +13,7 @@ import 'api/farmer_profile.dart';
 
 class AppInitilizer {
   //make singleton
-  static init() {
+  static void init() {
     UserServiceApi.init();
     FarmerServiceApi.init();
     MasterService.init();

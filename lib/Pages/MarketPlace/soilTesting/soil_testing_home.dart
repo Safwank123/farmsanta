@@ -22,7 +22,7 @@ import '../../base_screen.dart';
 class SoilTestingHome extends BaseScreen {
   final LabModel labmodel;
   final SoilTestBookingModel booking;
-  const SoilTestingHome( {Key? key, required this.labmodel, required this.booking,}) : super(key: key);
+  const SoilTestingHome( {super.key, required this.labmodel, required this.booking,});
 
   @override
   BaseScreenState<SoilTestingHome> createState() => _SoilTestingHomeState();

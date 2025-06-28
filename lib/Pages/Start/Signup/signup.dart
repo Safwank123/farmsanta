@@ -16,6 +16,7 @@ import 'package:farmsanta_new/Models/Farmer/Land.dart';
 import 'package:farmsanta_new/Pages/Home/home.dart';
 import 'package:farmsanta_new/Pages/Start/Signup/add_crop.dart';
 import 'package:farmsanta_new/Pages/Start/Signup/farm_base.dart';
+import 'package:farmsanta_new/Pages/Start/Signup/farm_draw.dart';
 import 'package:farmsanta_new/Pages/SupportPlace/Market/market.dart' as AppThemeColors;
 import 'package:farmsanta_new/Services/store_helper.dart';
 import 'package:farmsanta_new/Widgets/Widgets/custom_button.dart';
@@ -28,15 +29,18 @@ import 'package:farmsanta_new/api/master-service.dart';
 import 'package:farmsanta_new/mututations/common.dart';
 import 'package:farmsanta_new/themeFiles/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignupScreen extends StatefulWidget {
   static const String routeName = '/signup-screen';
   
-  const SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({super.key});
   
   @override
   SignupScreenState createState() => SignupScreenState();
@@ -162,7 +166,7 @@ class SignupScreenState extends State<SignupScreen> {
               _buildDateOfBirthSection(colorLint),
               _buildFarmSizeSection(colorLint),
               _buildCropsSection(primary),
-              _buildFarmSection(),
+            _buildFarmSection(lands: lands, rebuild: () => setState(() {})),
               _buildDoneButton(),
             ],
           ),
@@ -274,40 +278,22 @@ class SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildGenderSection(Color primary) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        15.heightBox,
-        CustomText(textKey: AppStrings.gender, color: primary, bold: true),
-        VxBuilder(
-          builder: (context, store, status) {
-            final genders = StoreHelper.store.genders;
-            return StatefulBuilder(
-              builder: (context, setState) => Column(
-                children: List.generate((genders.length / 2).ceil(), (index) {
-                  final start = 2 * index;
-                  final gen = genders[start];
-                  final gen1 = start + 1 <= genders.length - 1 ? genders[start + 1] : null;
-                  
-                  return Row(
-                    children: [
-                      WidgetHelper.getRadio(gen, (value) => setState(() => farmer.gender = gen), 
-                        farmer.gender == gen).w40(context),
-                      if (gen1 != null)
-                        WidgetHelper.getRadio(gen1, (value) => setState(() => farmer.gender = gen1), 
-                          farmer.gender == gen1).w40(context),
-                    ],
-                  ).wFull(context);
-                }),
-              ),
-            );
-          },
-          mutations: const {UpdateGenderListMututation},
-        ),
-      ],
-    );
-  }
+Widget _buildGenderSection(Color primary) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      15.heightBox,
+      CustomText(textKey: AppStrings.gender, color: primary, bold: true),
+      WidgetHelper.getVxBuilderWithDropDown(
+        {UpdateGenderListMututation},           
+        (value) => farmer.gender = value,       
+        SignUpEnum.gender,                      // enum or category identifier
+        farmer.gender ?? "Male",                // default selected value
+      ),
+    ],
+  );
+}
+
 
   Widget _buildEducationSection() {
     return Column(
@@ -557,25 +543,157 @@ class SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildFarmSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        15.heightBox,
-        StatefulBuilder(
-          builder: (context, setState) => Column(
-            children: [
-              getRow(
-                "${AppStrings.myFarm.translate()} (${lands.length})",
-                AppStrings.addFarm,
-                () => navigateToAddFarm(() => setState(() {})),
-              ),
-            ],
-          ),
+
+
+Widget _buildFarmSection({required List<LandModel> lands, required VoidCallback rebuild}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      15.heightBox,
+      getRow(
+        "${AppStrings.myFarm.translate()} (${lands.length})",
+        AppStrings.addFarm,
+        () => navigateToAddFarm(rebuild),
+      ),
+      10.heightBox,
+      ...lands.map((farm) => _buildFarmCard(farm)).toList(),
+    ],
+  );
+}
+
+
+
+
+Widget _buildFarmCard(LandModel farm) {
+  final firstCoord = farm.coordinates.isNotEmpty ? farm.coordinates.first : null;
+  final center = firstCoord != null
+      ? LatLng(firstCoord.latitude, firstCoord.longitude)
+      : LatLng(10.8505, 76.2711); // Default center: Kerala
+
+  final List<LatLng> boundaryPoints = farm.coordinates
+      .map((c) => LatLng(c.latitude, c.longitude))
+      .toList();
+
+  return FutureBuilder<String>(
+    future: getLocationName(center),
+    builder: (context, snapshot) {
+      final locationName = snapshot.data ?? "Loading...";
+
+      return Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.15),
+              blurRadius: 6,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-      ],
-    );
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            8.heightBox,
+            Text(
+  "📍 Location: (${center.latitude.toStringAsFixed(4)}, ${center.longitude.toStringAsFixed(4)})",
+  style: const TextStyle(fontWeight: FontWeight.bold),
+),
+            10.heightBox,
+            if (firstCoord != null)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: FlutterMap(
+                    options: MapOptions(
+                      initialCenter: center,
+                      initialZoom: 15.0,
+                      interactionOptions: const InteractionOptions(
+                        flags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
+                      ),
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        userAgentPackageName: 'com.example.farmsanta_new',
+                      ),
+                      if (boundaryPoints.length >= 3)
+                        PolygonLayer(
+                          polygons: [
+                            Polygon(
+                              points: boundaryPoints,
+                              color: Colors.green.withOpacity(0.3),
+                              borderColor: Colors.green,
+                              borderStrokeWidth: 2,
+                            ),
+                          ],
+                        ),
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: center,
+                            width: 160,
+                            height: 60,
+                            child: Column(
+                              children: [
+                                // ✅ This shows the location name directly on the map
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(6),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 4,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    locationName,
+                                    style: const TextStyle(fontSize: 12),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const Icon(Icons.location_on, color: Colors.red, size: 32),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            else
+              const Text("⚠ No coordinates available."),
+            10.heightBox,
+            Text("🧭 Total Coordinates: ${farm.coordinates.length}"),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+
+Future<String> getLocationName(LatLng coords) async {
+  try {
+    final placemarks = await placemarkFromCoordinates(coords.latitude, coords.longitude);
+    if (placemarks.isNotEmpty) {
+      final p = placemarks.first;
+      return "${p.locality ?? p.subAdministrativeArea ?? ''}, ${p.administrativeArea ?? ''}, ${p.country ?? ''}";
+    }
+  } catch (e) {
+    print("Geocoding error: $e");
   }
+  return "Unknown Location";
+}
 
   Widget _buildDoneButton() {
     return Column(
@@ -634,28 +752,31 @@ class SignupScreenState extends State<SignupScreen> {
     }
   }
 
-  Future<void> navigateToAddFarm(VoidCallback updateState) async {
-    try {
-      final status = await Permission.location.request();
-      if (status == PermissionStatus.granted) {
-        StoreHelper.store.position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.bestForNavigation,
-        );
-        final result = await StyleHelper.navigateToPageWithoutReplaceMentNamed(FarmScreen.routeName);
-        if (result != null && result is List<LandModel> && mounted) {
-          updateState();
-          lands = result;
-        }
-      } else {
-        StyleHelper.showToast("Location permission is required");
+Future<void> navigateToAddFarm(VoidCallback updateState) async {
+  try {
+    final status = await Permission.location.request();
+
+    if (status == PermissionStatus.granted) {
+      StoreHelper.store.position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation,
+      );
+
+      final result = await StyleHelper.navigateToPageWithoutReplaceMentNamed(FarmDrawScreen.routeName);
+
+      if (result != null && result is LandModel) {
+        lands.add(result);          // ✅ add to top-level list
+        updateState();              // ✅ trigger UI refresh
+        StyleHelper.showToast("Farm added successfully!");
       }
-    } catch (e) {
-      debugPrint('Farm navigation error: $e');
-      if (mounted) {
-        StyleHelper.showToast("Failed to add farm location");
-      }
+    } else {
+      StyleHelper.showToast("Location permission is required.");
     }
+  } catch (e) {
+    debugPrint('Farm navigation error: $e');
+    StyleHelper.showToast("Failed to add farm location.");
   }
+}
+
 
   Future<void> completeSignUp() async {
     if (!_validateInputs()) return;
@@ -816,8 +937,8 @@ class CropImageWidget extends StatelessWidget {
   const CropImageWidget({
     required this.imagePath,
     this.size = 40,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

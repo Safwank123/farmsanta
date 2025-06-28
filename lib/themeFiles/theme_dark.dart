@@ -46,7 +46,6 @@ ThemeData darkTheme() {
     primaryColorLight: APP_PRIMARY_LIGHT_COLOR,
     primaryColorDark: APP_DARK_LIGHT_PRIMARY_COLOR,
     scaffoldBackgroundColor: APP_SCAFFOLD_COLOR,
-    dialogBackgroundColor: APP_DIALOG_BACKGROUND_COLOR,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: 'Roboto',
     primaryTextTheme: const TextTheme(
@@ -302,30 +301,30 @@ ThemeData darkTheme() {
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: SNACKBAR_BACKGROUND_COLOR,
     ), checkboxTheme: CheckboxThemeData(
- fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return APP_DARK_PRIMARY_COLOR; }
+ fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return APP_DARK_PRIMARY_COLOR; }
  return null;
  }),
  ), radioTheme: RadioThemeData(
- fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return APP_DARK_PRIMARY_COLOR; }
+ fillColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return APP_DARK_PRIMARY_COLOR; }
  return null;
  }),
  ), switchTheme: SwitchThemeData(
- thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return APP_DARK_PRIMARY_COLOR; }
+ thumbColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return APP_DARK_PRIMARY_COLOR; }
  return null;
  }),
- trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return APP_DARK_PRIMARY_COLOR; }
+ trackColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+ if (states.contains(WidgetState.disabled)) { return null; }
+ if (states.contains(WidgetState.selected)) { return APP_DARK_PRIMARY_COLOR; }
  return null;
  }),
  ), colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
-        .copyWith(secondary: Colors.greenAccent, brightness: Brightness.dark).copyWith(background: APP_BACKGROUND_COLOR), bottomAppBarTheme: BottomAppBarTheme(color: APP_ACCENT_COLOR),
+        .copyWith(secondary: Colors.greenAccent, brightness: Brightness.dark).copyWith(surface: APP_BACKGROUND_COLOR), bottomAppBarTheme: BottomAppBarTheme(color: APP_ACCENT_COLOR), dialogTheme: DialogThemeData(backgroundColor: APP_DIALOG_BACKGROUND_COLOR),
     // accentColor: APP_ACCENT_COLOR,
   );
 }

@@ -26,7 +26,7 @@ import 'Diseases/crop_diseases.dart';
 
 class MyCrops extends StatefulWidget {
   static String routeName = '/my-crops';
-  const MyCrops({Key? key}) : super(key: key);
+  const MyCrops({super.key});
 
   @override
   State<MyCrops> createState() => _MyCropsState();
@@ -59,7 +59,7 @@ class _MyCropsState extends State<MyCrops> {
   }
 
   //filtering list on the basis of selected crop
-  selectCrop() {
+  void selectCrop() {
     filteredDisease.clear();
     filteredDisease.addAll(StoreHelper.store.diseasesList
         .where((element) => element.crops.contains(selectedCrop)));
@@ -386,7 +386,6 @@ class _MyCropsState extends State<MyCrops> {
     ).onTap(() {
       navigateToPageWithoutReplaceMent(const PopScreen());
     });
-    ;
   }
 
   //Diseases card list widget

@@ -10,15 +10,15 @@ class ProductPage extends BaseScreen {
   static String routeName = '/product-page-screen';
   List<StoreCardModel?> storeList;
 
-  ProductPage({required this.storeList});
+  ProductPage({super.key, required this.storeList});
 
   @override
   BaseScreenState<ProductPage> createState() => _ProductPageState();
 }
 
 class _ProductPageState extends BaseScreenState<ProductPage> {
-  bool _pinned = true;
-  bool _snap = false;
+  final bool _pinned = true;
+  final bool _snap = false;
   List<StoreCardModel?> filteredStoreList = StoreHelper.store.homeStoreList;
   String selectedFilter = AppStrings.all;
 

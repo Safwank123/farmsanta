@@ -556,7 +556,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     getData2();
   }
 
-  getData2() async {
+  Future<void> getData2() async {
     //pop data
     getPopData();
 
@@ -577,8 +577,8 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     getMarketPrice();
   }
 
-  setLoaded() {
-    print("count is ${count}");
+  void setLoaded() {
+    print("count is $count");
     if (count > 5) {
       // dialog.close();
       setState(() {
@@ -589,7 +589,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     }
   }
 
-  getLocation() async {
+  Future<void> getLocation() async {
     var position = StoreHelper.store.position;
     if (position == null) {
       var status = await Permission.location.request();
@@ -606,13 +606,13 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     }
   }
 
-  getWeatherData(String lat, String long) async {
+  Future<void> getWeatherData(String lat, String long) async {
     StoreHelper.store.weatherData =
         await MasterController.getAllWeatherInfo(lat, long);
     setLoaded();
   }
 
-  getPopData() async {
+  Future<void> getPopData() async {
     var list = await POPController.getPopList() ?? [];
 
     StoreHelper.store.popList.addAll(list.map((e) {
@@ -624,7 +624,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     setLoaded();
   }
 
-  getSocialMessages() async {
+  Future<void> getSocialMessages() async {
     List<Message> list = await MessageController.getPosts("") ?? [];
 
     StoreHelper.store.socialMessageList = list.map((e) {
@@ -633,7 +633,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     }).toList();
   }
 
-  getCropStages() async {
+  Future<void> getCropStages() async {
     StoreHelper.store.cropStageList =
         await MasterController.getAllCropStages() ?? [];
     setLoaded();
@@ -646,7 +646,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
 
   }
 
-  getCropAdvisories() async {
+  Future<void> getCropAdvisories() async {
     var list = await MasterController.getCropAdvisories() ?? [];
     StoreHelper.store.cropAdvisoriesList = list.map((e) {
       e.cropName = StoreHelper.getCropName(e.crop);
@@ -655,7 +655,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     setLoaded();
   }
 
-  getFarmScouting() async {
+  Future<void> getFarmScouting() async {
     var list = await FarmerController.getFarmScoutings(
             "", StoreHelper.store.farmerMainModel!.uuid!) ??
         [];
@@ -677,7 +677,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     setLoaded();
   }
 
-  getCropDisease() async {
+  Future<void> getCropDisease() async {
     var list = await MasterController.getAllCropDiseases() ?? [];
     list.sort((a, b) {
       return b.updatedTimestamp.compareTo(a.updatedTimestamp);
@@ -699,7 +699,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     setLoaded();
   }
 
-  getMarketPrice() async {
+  Future<void> getMarketPrice() async {
     StoreHelper.store.priceListFarmSupport =
         await MarketServiceController.getPrice() ?? [];
     UpdateMarketPriceAppbar();
@@ -707,7 +707,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
   }
 
   //TODO
-  sendRegistrationToken() async {}
+  Future<void> sendRegistrationToken() async {}
 
   //crop advisory card list widget
   Widget cropAdvisoriesCardList(CropAdvisoryModel model) {
@@ -869,7 +869,6 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
     ).onTap(() {
       navigateToPageWithoutReplaceMent(const PopScreen());
     });
-    ;
   }
 
   //Diseases card list widget

@@ -16,7 +16,7 @@ import '../../../themeFiles/app_colors.dart';
 import '../../base_screen.dart';
 
 class SoilTestingCheckout extends BaseScreen {
-  const SoilTestingCheckout({Key? key}) : super(key: key);
+  const SoilTestingCheckout({super.key});
 
   @override
   BaseScreenState<SoilTestingCheckout> createState() => _SoilTestingCheckoutState();

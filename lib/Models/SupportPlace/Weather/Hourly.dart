@@ -67,7 +67,7 @@ class Hourly {
               .toList()
           : null,
       pop: json['pop'] != null ? json['pop'] as num : null,
-      rain: json['rain'] != null ? json['rain'] : null,
+      rain: json['rain'],
       sunrise: json['sunrise'] != null ? json['sunrise'] as num : null,
       sunset: json['sunset'] != null ? json['sunset'] as num : null,
       moonrise: json['moonrise'] != null ? json['moonrise'] as num : null,

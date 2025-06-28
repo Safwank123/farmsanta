@@ -20,7 +20,7 @@ import 'lab_test_detail_page.dart';
 
 class SoilTestingLab extends BaseScreen {
 
-  const SoilTestingLab({Key? key}) : super(key: key);
+  const SoilTestingLab({super.key});
 
   @override
   BaseScreenState<SoilTestingLab> createState() => _SoilTestingLabState();
@@ -79,7 +79,7 @@ class _SoilTestingLabState extends BaseScreenState<SoilTestingLab> {
 
                         Column(
                           children:[
-                            CustomText(textKey: "5" + AppStrings.kmaway, color: AppColors.white,).p(3).box.make().color(AppColors.soilTestPrimary).cornerRadius(5).centered(),
+                            CustomText(textKey: "5${AppStrings.kmaway}", color: AppColors.white,).p(3).box.make().color(AppColors.soilTestPrimary).cornerRadius(5).centered(),
                             CustomText(textKey: AppStrings.fromyourlocation, color: AppColors.gray, style: const TextStyle(fontSize: 1),).scale(scaleValue: 0.8)],
                         ).scale(scaleValue: 0.7, alignment: Alignment.centerRight)
 

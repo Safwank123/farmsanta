@@ -17,7 +17,7 @@ import 'farmtalk_details.dart';
 class FarmTalkHomeScreen extends BaseScreen {
   static String routeName = '/farm-talk-home-screen';
   final Message message;
-  const FarmTalkHomeScreen({Key? key, required this.message}) : super(key: key);
+  const FarmTalkHomeScreen({super.key, required this.message});
 
   @override
   BaseScreenState<FarmTalkHomeScreen> createState() =>

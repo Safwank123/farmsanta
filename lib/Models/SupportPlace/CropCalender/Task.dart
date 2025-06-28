@@ -18,7 +18,7 @@ class Tasklist {
   });
 
   factory Tasklist.fromJson(Map<String, dynamic> json) => Tasklist(
-        id: json["id"] != null ? json["id"].toInt() : null,
+        id: json["id"]?.toInt(),
         oprationName: json["oprationName"] != null
             ? json["oprationName"] as String
             : null,
@@ -29,8 +29,8 @@ class Tasklist {
             ? null
             : List<dynamic>.from(json["taskImages"]!.map((x) => x)),
         taskSequance:
-            json["taskSequance"] != null ? json["taskSequance"].toInt() : null,
-        status: json["status"] != null ? json["status"] : null,
+            json["taskSequance"]?.toInt(),
+        status: json["status"],
         oprationType: json["oprationType"] != null
             ? json["oprationType"] as String
             : null,

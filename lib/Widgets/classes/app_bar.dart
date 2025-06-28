@@ -27,7 +27,7 @@ ScrollController controller = ScrollController();
 
 class AppBarDesigns {
   // appbar to display title and drawer or actions (optional)
-  static getTitleAndDrawerAppbarWithProfile(Widget? leading,
+  static AppBar getTitleAndDrawerAppbarWithProfile(Widget? leading,
       {List<Widget>? actions}) {
     UserModel? model = StoreHelper.store.user;
     return AppBar(
@@ -46,7 +46,7 @@ class AppBarDesigns {
     );
   }
 
-  static getTitleAndDrawerAppbarWithNotification(
+  static AppBar getTitleAndDrawerAppbarWithNotification(
       BuildContext context, Widget? leading,
       {List<Widget>? actions, TextEditingController? textEditingController}) {
     return AppBar(
@@ -84,7 +84,7 @@ class AppBarDesigns {
     );
   }
 
-  static itemRateBarRow() {
+  static VxBuilder<Object?> itemRateBarRow() {
     return VxBuilder(
         builder: (context, store, status) {
           var list = StoreHelper.store.priceListFarmSupport;
@@ -146,7 +146,7 @@ class AppBarDesigns {
   }
 
   // appbar for displaying title and back button
-  static getAppbarWithBackAndTitle(BuildContext context,
+  static AppBar getAppbarWithBackAndTitle(BuildContext context,
       {double? elevation, List<Widget>? actions}) {
     return AppBar(
       elevation: elevation,
@@ -157,7 +157,7 @@ class AppBarDesigns {
   }
 
   // app bar with zero height
-  static getAppBar() {
+  static AppBar getAppBar() {
     return AppBar(
       backgroundColor: primaryColor,
       toolbarHeight: 0,
@@ -165,7 +165,7 @@ class AppBarDesigns {
   }
 
   //app bar with title and trailing icon button
-  static getAppTitleAndIconButton(String title, Widget iconButton,
+  static AppBar getAppTitleAndIconButton(String title, Widget iconButton,
       {Color? backgroundColor, bool isBold = false, double titleSize = 18}) {
     return AppBar(
       title: CustomText(
@@ -197,7 +197,7 @@ class AppBarDesigns {
   }
 
   //app bar with title only
-  static getAppTitleOnly(
+  static AppBar getAppTitleOnly(
     String title, {
     double? titleSize,
     Color? backgroundColor,
@@ -238,7 +238,7 @@ class AppBarDesigns {
   }
 
 // app bar with leading circular back button and trailing more_vert dots icon button
-  static getAppBarCircularBackButtonAndMoreVertIconButton(BuildContext context,
+  static AppBar getAppBarCircularBackButtonAndMoreVertIconButton(BuildContext context,
       {Color? circularBackButtonColor}) {
     return AppBar(
       toolbarHeight: height * 0.08,

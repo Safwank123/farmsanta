@@ -33,7 +33,7 @@ class CustomInputField extends StatefulWidget {
   Widget? suffixWidget;
   final TextEditingController textEditingController;
   CustomInputField({
-    Key? key,
+    super.key,
     required this.hint,
     this.label = "",
     this.isFocused = false,
@@ -61,7 +61,7 @@ class CustomInputField extends StatefulWidget {
     this.suffixWidget,
     required this.textEditingController,
     this.isMobileNumber = false,
-  }) : super(key: key);
+  });
 
   @override
   CustomInputFieldState createState() => CustomInputFieldState();
@@ -186,7 +186,7 @@ class CustomInputFieldState extends State<CustomInputField> {
     );
   }
 
-  checkValue(value) {
+  String? checkValue(value) {
     if (widget.errorMessage != "") {
       if (value == "") return widget.errorMessage;
 

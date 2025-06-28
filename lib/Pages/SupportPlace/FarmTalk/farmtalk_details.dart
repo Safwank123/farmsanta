@@ -16,7 +16,7 @@ class FarmTalkExploreDetailsScreen extends BaseScreen {
   static const routeName = "/farm-talk-explore-details-screen";
   final Message message;
   int currentPageIndex;
-  FarmTalkExploreDetailsScreen( {required this.message, this.currentPageIndex = 0});
+  FarmTalkExploreDetailsScreen( {super.key, required this.message, this.currentPageIndex = 0});
 
   @override
   BaseScreenState<FarmTalkExploreDetailsScreen> createState() => _FarmTalkExploreDetailsScreenState();

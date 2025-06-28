@@ -93,7 +93,7 @@ class _IpmDetailsState extends BaseScreenState<IpmDetails> with SingleTickerProv
               },
               if (disease.description != null) WidgetHelper().keyValueText('Description', disease.description!),
               if (disease.symptomsOfAttack != null) WidgetHelper().keyValueText('Symptom of Attack', disease.symptomsOfAttack!),
-              if (disease.favourableConditions != null) WidgetHelper().keyValueText('Favourable Conditions', disease.favourableConditions),
+              WidgetHelper().keyValueText('Favourable Conditions', disease.favourableConditions),
               if (disease.culturalMechanicalControl != null)
                 WidgetHelper().keyValueText('Cultural Mechanical Control', disease.culturalMechanicalControl!),
               if (disease.preventiveMeasures != null) WidgetHelper().keyValueText('Preventive Measures', disease.preventiveMeasures!),

@@ -20,7 +20,7 @@ import 'pop_saved.dart';
 
 class PopScreen extends BaseScreen {
   static const String routeName = "/pop-screen";
-  const PopScreen({Key? key}) : super(key: key);
+  const PopScreen({super.key});
 
   @override
   BaseScreenState<PopScreen> createState() => _PopScreenState();

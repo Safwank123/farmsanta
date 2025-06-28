@@ -18,8 +18,7 @@ import '/Widgets/classes/widget_helper_class.dart';
 
 class MarketPlaceCancellationApproved extends BaseScreen {
   final bool isPurchase;
-  const MarketPlaceCancellationApproved({Key? key, required this.isPurchase})
-      : super(key: key);
+  const MarketPlaceCancellationApproved({super.key, required this.isPurchase});
 
   @override
   BaseScreenState<MarketPlaceCancellationApproved> createState() =>

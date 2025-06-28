@@ -18,7 +18,7 @@ class CustomButtonWithNetworkImage extends StatefulWidget {
   final Color textColor;
   final Color buttonColor;
   const CustomButtonWithNetworkImage(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.onTap,
       this.imagePath,
@@ -26,8 +26,7 @@ class CustomButtonWithNetworkImage extends StatefulWidget {
       this.imageHeight = 16.0,
       this.imageWidth = 16.0,
       this.textColor = Colors.white,
-      this.buttonColor = primaryColor})
-      : super(key: key);
+      this.buttonColor = primaryColor});
 
   @override
   _CustomButtonWithNetworkImageState createState() =>

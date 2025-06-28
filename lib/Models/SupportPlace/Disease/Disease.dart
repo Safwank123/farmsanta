@@ -2,7 +2,6 @@
 
 
 import 'package:farmsanta_new/Services/store_helper.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 import '../../Common/photo_model.dart';
 import '../POP/InsectLifeCycle.dart';

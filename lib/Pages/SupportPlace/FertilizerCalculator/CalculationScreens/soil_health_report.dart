@@ -16,8 +16,7 @@ import 'soil_test_selectcrops.dart';
 
 class SoilHealthReport extends BaseScreen {
   FertilizerCalculatorReportDto fertilizerCalculatorReportDto;
-  SoilHealthReport({Key? key, required this.fertilizerCalculatorReportDto})
-      : super(key: key);
+  SoilHealthReport({super.key, required this.fertilizerCalculatorReportDto});
 
   @override
   BaseScreenState<SoilHealthReport> createState() => _SoilHealthReportState();

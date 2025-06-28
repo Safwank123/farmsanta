@@ -58,7 +58,7 @@ class Current {
         weather!.add(WeatherDet.fromJson(v));
       });
     }
-    rain = json['rain'] != null ? json['rain'] : null;
+    rain = json['rain'];
   }
 
   Map<String, dynamic> toJson() {

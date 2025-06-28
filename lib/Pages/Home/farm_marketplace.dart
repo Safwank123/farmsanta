@@ -20,8 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../MarketPlace/dummy_array.dart';
-import '../MarketPlace/soilTesting/soil_testing_home.dart';
-import '../MarketPlace/soilTesting/soil_testing_lab.dart';
 
 class FarmMarketplace extends BaseScreen {
   const FarmMarketplace({super.key});

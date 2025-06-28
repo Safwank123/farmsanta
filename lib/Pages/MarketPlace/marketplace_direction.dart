@@ -1,14 +1,13 @@
-
-
-import 'package:farmsanta_new/Pages/base_screen.dart';
-import 'package:farmsanta_new/Widgets/Widgets/custom_button.dart';
-import 'package:farmsanta_new/Widgets/Widgets/custom_text.dart';
-import 'package:farmsanta_new/themeFiles/app_typography.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../Widgets/Widgets/custom_button.dart';
+import '../../Widgets/Widgets/custom_text.dart';
 import '../../themeFiles/app_colors.dart';
+import '../../themeFiles/app_typography.dart';
+import '../base_screen.dart';
 
 class DirectionPage extends BaseScreen {
   const DirectionPage({super.key});
@@ -21,14 +20,14 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  TextEditingController startLocationController = TextEditingController();
-  TextEditingController endLocationController = TextEditingController();
-  GoogleMapController? _mapController;
-  Set<Marker> _markers = {};
+  final TextEditingController startLocationController = TextEditingController();
+  final TextEditingController endLocationController = TextEditingController();
+
+  LatLng startLocation = LatLng(37.7749, -122.4194); // Example start
+  LatLng endLocation = LatLng(37.3382, -121.8863);   // Example end
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = TabController(length: vehicleOptions.length, vsync: this);
   }
@@ -41,59 +40,49 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
     super.dispose();
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
-  }
-
-  void _addMarkers() {
-    String startLocation = startLocationController.text;
-    String endLocation = endLocationController.text;
-
-    setState(() {
-      _markers.clear();
-      _markers.add(
-        Marker(
-          markerId: MarkerId('start'),
-          position: LatLng(37.7749,
-              -122.4194), // Replace with actual coordinates of start location
-          infoWindow:
-              InfoWindow(title: 'Start Location', snippet: startLocation),
-        ),
-      );
-      _markers.add(
-        Marker(
-          markerId: MarkerId('end'),
-          position: LatLng(37.3382,
-              -121.8863), // Replace with actual coordinates of end location
-          infoWindow: InfoWindow(title: 'End Location', snippet: endLocation),
-        ),
-      );
-    });
-  }
-
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: bottomBar(() {}, "5 km", "16 mins"),
-      body: Stack(alignment: Alignment.topCenter, children: [
-        //maps
-        Expanded(
-          child: GoogleMap(
-            onMapCreated: _onMapCreated,
-            markers: _markers,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(
-                  37.7749, -122.4194), // Replace with initial camera position
-              zoom: 12.0,
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          FlutterMap(
+            options: MapOptions(
+              initialCenter: startLocation,
+              initialZoom: 10,
+              onTap: (tapPosition, point) {
+                // You can implement marker update on tap if needed
+              },
             ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.example.farmsanta_new',
+              ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    point: startLocation,
+                    width: 40,
+                    height: 40,
+                    child: const Icon(Icons.location_on, color: Colors.red),
+                  ),
+                  Marker(
+                    point: endLocation,
+                    width: 40,
+                    height: 40,
+                    child: const Icon(Icons.flag, color: Colors.green),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-
-        //Top
-        locationDirectionInfo(context, "Your Location", "Farm Store")
-            .pOnly(top: 50, left: 20, right: 20),
-      ]),
+          locationDirectionInfo(context, "Your Location", "Farm Store")
+              .pOnly(top: 50, left: 20, right: 20),
+        ],
+      ),
     );
   }
 
@@ -117,14 +106,12 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
             10.widthBox,
             Row(
               children: [
-                Icon(
-                  Icons.pedal_bike,
-                  size: 16,
-                ),
+                const Icon(Icons.pedal_bike, size: 16),
                 CustomText(
-                    textKey: timeLeft,
-                    style: AppTextStyle.bodySmall,
-                    color: AppColors.primary),
+                  textKey: timeLeft,
+                  style: AppTextStyle.bodySmall,
+                  color: AppColors.primary,
+                ),
               ],
             ),
           ],
@@ -134,13 +121,12 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
   }
 
   Widget locationDirectionInfo(
-      BuildContext context, yourLocation, String storeLocation) {
+      BuildContext context, String yourLocation, String storeLocation) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +143,7 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
                   bold: true,
                 ),
               ],
-            )
+            ),
           ],
         ),
         20.heightBox,
@@ -165,7 +151,7 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
           labelColor: AppColors.enabledBlue,
           controller: _tabController,
           isScrollable: true,
-          labelPadding: EdgeInsets.symmetric(horizontal: 15),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 15),
           indicator: BoxDecoration(
             color: AppColors.blueLight,
             borderRadius: BorderRadius.circular(25),
@@ -177,9 +163,7 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
             return Tab(
               iconMargin: EdgeInsets.zero,
               text: option.distanceLeft,
-              icon: Icon(
-                option.icon,
-              ),
+              icon: Icon(option.icon),
             );
           }).toList(),
         ),
@@ -196,20 +180,20 @@ class _DirectionPageState extends BaseScreenState<DirectionPage>
     ),
     VehicleOption(
       title: 'Bicycle',
-      timeLeft: '35 min',
-      distanceLeft: '20 min',
+      timeLeft: '20 min',
+      distanceLeft: '3.5 km',
       icon: Icons.directions_bike,
     ),
     VehicleOption(
       title: 'Car',
-      timeLeft: '35 min',
-      distanceLeft: '10 min',
+      timeLeft: '10 min',
+      distanceLeft: '5.0 km',
       icon: Icons.directions_car,
     ),
     VehicleOption(
       title: 'Train',
-      timeLeft: '35 min',
-      distanceLeft: '15 min',
+      timeLeft: '15 min',
+      distanceLeft: '6.0 km',
       icon: Icons.train,
     ),
   ];

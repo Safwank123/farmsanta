@@ -59,64 +59,42 @@ class GenerateFertilizerReportPayload {
 
   factory GenerateFertilizerReportPayload.fromJson(Map<String, dynamic> json) {
     return GenerateFertilizerReportPayload(
-      nitrogenousFertilizer: json['nitrogenousFertilizer'] != null
-          ? json['nitrogenousFertilizer'].toInt()
-          : null,
-      phosphorusFertilizer: json['phosphorusFertilizer'] != null
-          ? json['phosphorusFertilizer'].toInt()
-          : null,
-      boronFertilizer: json['boronFertilizer'] != null
-          ? json['boronFertilizer'].toInt()
-          : null,
+      nitrogenousFertilizer: json['nitrogenousFertilizer']?.toInt(),
+      phosphorusFertilizer: json['phosphorusFertilizer']?.toInt(),
+      boronFertilizer: json['boronFertilizer']?.toInt(),
       zincLevelZN:
-          json['zincLevelZN'] != null ? json['zincLevelZN'].toInt() : null,
+          json['zincLevelZN']?.toInt(),
       npkFertilizer:
-          json['npkFertilizer'] != null ? json['npkFertilizer'].toInt() : null,
-      sulphurS: json['sulphurS'] != null ? json['sulphurS'].toDouble() : null,
+          json['npkFertilizer']?.toInt(),
+      sulphurS: json['sulphurS']?.toDouble(),
       sulphurLevelS:
-          json['sulphurLevelS'] != null ? json['sulphurLevelS'].toInt() : null,
+          json['sulphurLevelS']?.toInt(),
       borronLevelB:
-          json['borronLevelB'] != null ? json['borronLevelB'].toInt() : null,
-      nitrogenLevelN: json['nitrogenLevelN'] != null
-          ? json['nitrogenLevelN'].toInt()
-          : null,
-      testReportAvailable: json['testReportAvailable'] != null
-          ? json['testReportAvailable']
-          : null,
-      borronB: json['borronB'] != null ? json['borronB'].toDouble() : null,
-      potassiumFertilizer: json['potassiumFertilizer'] != null
-          ? json['potassiumFertilizer'].toInt()
-          : null,
-      area: json['area'] != null ? json['area'].toDouble() : null,
+          json['borronLevelB']?.toInt(),
+      nitrogenLevelN: json['nitrogenLevelN']?.toInt(),
+      testReportAvailable: json['testReportAvailable'],
+      borronB: json['borronB']?.toDouble(),
+      potassiumFertilizer: json['potassiumFertilizer']?.toInt(),
+      area: json['area']?.toDouble(),
       phosphorusP:
-          json['phosphorusP'] != null ? json['phosphorusP'].toDouble() : null,
+          json['phosphorusP']?.toDouble(),
       cropId: json['cropId'] != null ? json['cropId'] as String : null,
-      id: json['id'] != null ? json['id'].toInt() : null,
+      id: json['id']?.toInt(),
       cropPriority:
-          json['cropPriority'] != null ? json['cropPriority'].toInt() : null,
-      photassiumLevelK: json['photassiumLevelK'] != null
-          ? json['photassiumLevelK'].toInt()
-          : null,
+          json['cropPriority']?.toInt(),
+      photassiumLevelK: json['photassiumLevelK']?.toInt(),
       ageOfPlant:
-          json['ageOfPlant'] != null ? json['ageOfPlant'].toDouble() : null,
-      zincZN: json['zincZN'] != null ? json['zincZN'].toDouble() : null,
-      zincFertilizer: json['zincFertilizer'] != null
-          ? json['zincFertilizer'].toInt()
-          : null,
+          json['ageOfPlant']?.toDouble(),
+      zincZN: json['zincZN']?.toDouble(),
+      zincFertilizer: json['zincFertilizer']?.toInt(),
       photassiumK:
-          json['photassiumK'] != null ? json['photassiumK'].toDouble() : null,
-      potentialHydrogenLevelPH: json['potentialHydrogenLevelPH'] != null
-          ? json['potentialHydrogenLevelPH'].toInt()
-          : null,
-      potentialHydrogenPH: json['potentialHydrogenPH'] != null
-          ? json['potentialHydrogenPH'].toDouble()
-          : null,
-      phosphorusLevelP: json['phosphorusLevelP'] != null
-          ? json['phosphorusLevelP'].toInt()
-          : null,
-      cropType: json['cropType'] != null ? json['cropType'].toInt() : null,
+          json['photassiumK']?.toDouble(),
+      potentialHydrogenLevelPH: json['potentialHydrogenLevelPH']?.toInt(),
+      potentialHydrogenPH: json['potentialHydrogenPH']?.toDouble(),
+      phosphorusLevelP: json['phosphorusLevelP']?.toInt(),
+      cropType: json['cropType']?.toInt(),
       nitrogenN:
-          json['nitrogenN'] != null ? json['nitrogenN'].toDouble() : null,
+          json['nitrogenN']?.toDouble(),
     );
   }
 

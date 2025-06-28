@@ -18,7 +18,7 @@ class CustomButtonWithImage extends StatefulWidget {
   final Color textColor;
   final Color buttonColor;
   const CustomButtonWithImage(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.onTap,
       this.isBold = false,
@@ -28,8 +28,7 @@ class CustomButtonWithImage extends StatefulWidget {
       this.imageWidth = 16.0,
       this.paddingValue = 0,
       this.textColor = Colors.white,
-      this.buttonColor = primaryColor})
-      : super(key: key);
+      this.buttonColor = primaryColor});
 
   @override
   _CustomButtonWithImageState createState() => _CustomButtonWithImageState();

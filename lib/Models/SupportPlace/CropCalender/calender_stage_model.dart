@@ -35,11 +35,11 @@ class CropStageCalendar {
         stageName:
             json["stageName"] != null ? json["stageName"] as String : null,
         stageStatus:
-            json["stageStatus"] != null ? json["stageStatus"].toInt() : null,
+            json["stageStatus"]?.toInt(),
         stageWeek:
             json["stageWeek"] != null ? json["stageWeek"] as String : null,
         isCurrentTask:
-            json["isCurrentTask"] != null ? json["isCurrentTask"] : false,
+            json["isCurrentTask"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,19 +76,19 @@ class StageList {
   });
 
   factory StageList.fromJson(Map<String, dynamic> json) => StageList(
-        id: json["id"] != null ? json["id"].toInt() : null,
+        id: json["id"]?.toInt(),
         userId: json["userId"],
-        status: json["status"] != null ? json["status"] : null,
+        status: json["status"],
         cropId: json["cropId"] != null ? json["cropId"] as String : null,
         stageName:
             json["stageName"] != null ? json["stageName"] as String : null,
-        weekInfo: json["weekInfo"] != null ? json["weekInfo"].toInt() : null,
+        weekInfo: json["weekInfo"]?.toInt(),
         tasklist: json["tasklist"] == null
             ? null
             : List<Tasklist>.from(
                 json["tasklist"]!.map((x) => Tasklist.fromJson(x))),
         languageId:
-            json["languageId"] != null ? json["languageId"].toInt() : null,
+            json["languageId"]?.toInt(),
       );
 
   Map<String, dynamic> toJson() => {

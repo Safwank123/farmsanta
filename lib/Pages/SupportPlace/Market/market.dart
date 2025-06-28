@@ -13,7 +13,7 @@ import '../../base_screen.dart';
 
 class MarketScreen extends BaseScreen {
   static String routeName = 'market-screen';
-  const MarketScreen({Key? key}) : super(key: key);
+  const MarketScreen({super.key});
 
   @override
   BaseScreenState<MarketScreen> createState() => _MarketScreenState();

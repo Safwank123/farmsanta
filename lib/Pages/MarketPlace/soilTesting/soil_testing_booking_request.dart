@@ -14,7 +14,7 @@ import '../../../themeFiles/app_colors.dart';
 import '../../base_screen.dart';
 
 class SoilTestBookingRequest extends BaseScreen {
-  const SoilTestBookingRequest({Key? key}) : super(key: key);
+  const SoilTestBookingRequest({super.key});
 
   @override
   State<SoilTestBookingRequest> createState() => _SoilTestBookingRequestState();
@@ -281,8 +281,7 @@ class _SoilTestBookingRequestState extends State<SoilTestBookingRequest> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomText(
-                      textKey: "5" +
-                          AppStrings.kmaway,
+                      textKey: "5${AppStrings.kmaway}",
                       color: AppColors.white,
                     )
                         .p(3)

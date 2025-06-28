@@ -22,19 +22,19 @@ class StageWeek {
   });
 
   factory StageWeek.fromJson(Map<String, dynamic> json) => StageWeek(
-        id: json["id"] != null ? json["id"].toInt() : null,
+        id: json["id"]?.toInt(),
         userId: json["userId"],
-        status: json["status"] != null ? json["status"] : null,
+        status: json["status"],
         cropId: json["cropId"] != null ? json["cropId"] as String : null,
         stageName:
             json["stageName"] != null ? json["stageName"] as String : null,
-        weekInfo: json["weekInfo"] != null ? json["weekInfo"].toInt() : null,
+        weekInfo: json["weekInfo"]?.toInt(),
         tasklist: json["tasklist"] == null
             ? null
             : List<Tasklist>.from(
                 json["tasklist"]!.map((x) => Tasklist.fromJson(x))),
         languageId:
-            json["languageId"] != null ? json["languageId"].toInt() : null,
+            json["languageId"]?.toInt(),
       );
 
   Map<String, dynamic> toJson() => {

@@ -19,8 +19,7 @@ class FarmTalkExploreScreen extends BaseScreen {
   final TrendingTags trendingTags;
   final Message message;
   const FarmTalkExploreScreen(
-      {Key? key, required this.trendingTags, required this.message})
-      : super(key: key);
+      {super.key, required this.trendingTags, required this.message});
 
   @override
   BaseScreenState<FarmTalkExploreScreen> createState() =>
@@ -75,16 +74,16 @@ class _FarmTalkExploreScreenState extends BaseScreenState<FarmTalkExploreScreen>
                   itemBuilder: (BuildContext bc) {
                     return const [
                       PopupMenuItem(
-                        child: Text("All posts"),
                         value: '/hello',
+                        child: Text("All posts"),
                       ),
                       PopupMenuItem(
-                        child: Text("Most like Posts "),
                         value: '/about',
+                        child: Text("Most like Posts "),
                       ),
                       PopupMenuItem(
-                        child: Text("Most Commented Posts"),
                         value: '/contact',
+                        child: Text("Most Commented Posts"),
                       )
                     ];
                   },

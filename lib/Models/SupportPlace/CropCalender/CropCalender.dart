@@ -24,8 +24,8 @@ class CropCalendar {
     try {
       return CropCalendar(
         cropId: json["cropId"] != null ? json["cropId"] as String : null,
-        id: json["id"] != null ? json["id"].toInt() : null,
-        stageId: json["stageId"] != null ? json["stageId"].toInt() : null,
+        id: json["id"]?.toInt(),
+        stageId: json["stageId"]?.toInt(),
         startDate: json["startDate"] == null
             ? null
             : DateTime.parse(json["startDate"]),
@@ -34,8 +34,8 @@ class CropCalendar {
     } catch (e) {
       return CropCalendar(
         cropId: json["cropId"] != null ? json["cropId"] as String : null,
-        id: json["id"] != null ? json["id"].toInt() : null,
-        stageId: json["stageId"] != null ? json["stageId"].toInt() : null,
+        id: json["id"]?.toInt(),
+        stageId: json["stageId"]?.toInt(),
         startDate: json["startDate"] == null
             ? null
             : DateTime.fromMillisecondsSinceEpoch(json["startDate"]),

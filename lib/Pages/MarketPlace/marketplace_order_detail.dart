@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'dart:ui';
 
 
 import 'package:farmsanta_new/Functions/common.dart';
@@ -9,7 +8,6 @@ import 'package:farmsanta_new/Widgets/classes/style_helper.dart';
 import 'package:farmsanta_new/Widgets/classes/widget_helper_class.dart';
 import 'package:flutter/material.dart';
 
-import 'package:easy_stepper/easy_stepper.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 

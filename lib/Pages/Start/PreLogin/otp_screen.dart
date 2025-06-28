@@ -159,7 +159,7 @@ class _OtpScreenState extends BaseScreenState<OtpScreen> {
   }
 
   //function to send otp to customer mobile number
-  sendOtp() async {
+  Future<void> sendOtp() async {
     if (StoreHelper.store.selectedCountry!.territoryName == "Cameroon" &&
         phoneNumber.startsWith("+237")) {
       //cameroon otp
@@ -174,7 +174,7 @@ class _OtpScreenState extends BaseScreenState<OtpScreen> {
     }
   }
 
-  _verifyPhone() async {
+  Future<void> _verifyPhone() async {
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber,
@@ -198,7 +198,7 @@ class _OtpScreenState extends BaseScreenState<OtpScreen> {
     } catch (e) {}
   }
 
-  verifyOtpPre() async {
+  Future<void> verifyOtpPre() async {
     if (isApiAuth) {
       String text = controller.text;
       if (text.isEmptyOrNull || text.length != 6) {
@@ -234,7 +234,7 @@ class _OtpScreenState extends BaseScreenState<OtpScreen> {
     return false;
   }
 
-  checkAndSend(bool data) async {
+  Future<void> checkAndSend(bool data) async {
     if (data) {
       ProgressDialog dialog = ProgressDialog(context: context);
       dialog.show(msg: AppStrings.verifying);

@@ -17,7 +17,7 @@ import 'crop_advisory_details.dart';
 
 class CropAdvisoryScreen extends BaseScreen {
   static const routeName = "/crop-advisory-screen";
-  const CropAdvisoryScreen({Key? key}) : super(key: key);
+  const CropAdvisoryScreen({super.key});
 
   @override
   BaseScreenState<CropAdvisoryScreen> createState() =>
@@ -88,7 +88,7 @@ class _CropAdvisoryScreenState extends BaseScreenState<CropAdvisoryScreen> {
     });
   }
 
-  getList() {
+  void getList() {
     cropAdvisoriesCardList = StoreHelper.store.cropAdvisoriesList;
   }
 

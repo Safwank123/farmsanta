@@ -1,12 +1,10 @@
 import 'package:farmsanta_new/Constants/strings.dart';
 import 'package:farmsanta_new/Models/Common/crop_model.dart';
-import 'package:farmsanta_new/Pages/SupportPlace/Market/market.dart' as AppThemeColors;
 import 'package:farmsanta_new/Widgets/Widgets/custom_button.dart';
 import 'package:farmsanta_new/Widgets/Widgets/custom_text.dart';
 import 'package:farmsanta_new/Widgets/classes/app_bar.dart';
 import 'package:farmsanta_new/themeFiles/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 import '../../base_screen.dart';
 
@@ -28,7 +26,7 @@ class _AddCropScreenState extends BaseScreenState<AddCropScreen> {
   CropModelShort(uuid: '3', cropName: 'Banana', imagePath: 'assets/images/crops/mattan.jpg'),
   CropModelShort(uuid: '4', cropName: 'Brinjal', imagePath: 'assets/images/crops/pacha.jpg'),
   CropModelShort(uuid: '5', cropName: 'Cabbage', imagePath: 'assets/images/crops/qf.jpg'),
-  CropModelShort(uuid: '6', cropName: 'Chilli', imagePath: 'assets/images/crops/chilli.jpg'),
+  CropModelShort(uuid: '6', cropName: 'Chilli', imagePath: 'assets/images/crops/tommato.jpg'),
   CropModelShort(uuid: '7', cropName: 'Barley', imagePath: 'assets/images/crops/tommato.jpg'),
   CropModelShort(uuid: '8', cropName: 'Bean', imagePath: 'assets/images/crops/ulli.jpg'),
 ];

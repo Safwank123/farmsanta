@@ -75,7 +75,7 @@ class PopSectionModel {
   factory PopSectionModel.fromJson(Map<String, dynamic> json) =>
       PopSectionModel(
         agronomyManager:
-            json['agronomyManager'] != null ? json['agronomyManager'] : false,
+            json['agronomyManager'] ?? false,
         climateDtos: json['climateDtos'] != null
             ? List<ClimateDto>.from(
                 json['climateDtos'].map((x) => ClimateDto.fromJson(x)))
@@ -132,7 +132,7 @@ class PopSectionModel {
             ? List<SeedTreatment>.from(
                 json['seedTreatments'].map((x) => SeedTreatment.fromJson(x)))
             : [],
-        superAdmin: json['superAdmin'] != null ? json['superAdmin'] : false,
+        superAdmin: json['superAdmin'] ?? false,
         trapCrops: json['trapCrops'] != null
             ? List<TrapCrop>.from(
                 json['trapCrops'].map((x) => TrapCrop.fromJson(x)))

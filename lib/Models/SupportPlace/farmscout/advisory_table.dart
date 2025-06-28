@@ -60,7 +60,7 @@ class AdvisoryTable {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['dataLabel'] = dataLabel;
     data['formulation'] = formulation;
     data['formulationType'] = formulationType;

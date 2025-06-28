@@ -8,9 +8,7 @@ import 'package:farmsanta_new/themeFiles/app_colors.dart';
 import 'package:farmsanta_new/themeFiles/app_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../../../../Constants/strings.dart';
-import '../../../../../Models/Common/crop_model.dart';
 import '../../../Models/SupportPlace/CropCalender/CropCalender.dart';
 import '../../../Models/SupportPlace/CropCalender/Task.dart';
 import '../../../../../Routes/image_routes.dart';
@@ -135,7 +133,7 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
 
                     ...(widget.stageModelList)
                         .map((e) => stageWidget(e))
-                        .toList(),
+                        ,
                   ]
                   //mach with crop
                   ),

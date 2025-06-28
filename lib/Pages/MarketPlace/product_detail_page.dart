@@ -20,7 +20,7 @@ class ProductDetailPage extends StatefulWidget {
   final StoreModel storeModel;
   final PurchaseOrderModel? purchaseOrderModel;
   final RentalOrderModel? rentalOrderModel;
-  const ProductDetailPage({Key? key, required this.isPurchase, required this.storeModel, this.rentalOrderModel, this.purchaseOrderModel}) : super(key: key);
+  const ProductDetailPage({super.key, required this.isPurchase, required this.storeModel, this.rentalOrderModel, this.purchaseOrderModel});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -32,7 +32,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   int item = 1;
   int currentIndex = 0;
   int selectedIndex = 0;
-  bool? liked = null;
+  bool? liked;
 
 
   @override

@@ -12,7 +12,6 @@ import 'package:velocity_x/velocity_x.dart';
 import '../Models/Common/farm_model.dart';
 import '../Models/Home/Price.dart';
 import '../Models/MarketPlace/Purchase/purchase_order_model.dart';
-import '../Models/MarketPlace/SoilTesting/review_model.dart';
 import '../Models/MarketPlace/category_model.dart';
 import '../Models/MarketPlace/offer_model.dart';
 import '../Models/MarketPlace/product_model.dart';

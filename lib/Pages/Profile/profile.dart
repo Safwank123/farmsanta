@@ -19,7 +19,7 @@ import '../base_screen.dart';
 
 class ProfileScreen extends BaseScreen {
   static const String routeName = "/profile-screen";
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   BaseScreenState<ProfileScreen> createState() => _ProfileScreenState();

@@ -29,7 +29,7 @@ class DatabaseConnector {
   }
 
   //function to create a tables
-  createTables() {
+  void createTables() {
     for (var element in tableCreateQueries) {
       db.execute(element);
     }

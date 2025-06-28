@@ -47,9 +47,9 @@ class FarmerController {
   static Future<List<FarmScouting>?> getFarmScoutings(
       String landId, String farmerId) async {
     String url = ApiConstants.farmScouting;
-    if (landId != null && landId.isNotEmpty) {
+    if (landId.isNotEmpty) {
       url = "${ApiConstants.farmScoutingByLand}/$landId";
-    } else if (farmerId != null && farmerId.isNotEmpty) {
+    } else if (farmerId.isNotEmpty) {
       url = "${ApiConstants.farmScoutingByFarmer}/$farmerId";
     }
 

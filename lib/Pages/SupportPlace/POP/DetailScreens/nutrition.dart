@@ -135,10 +135,10 @@ Widget nutritionDeficiencyDetails(DeficiencyDto model) {
             children: [
               // data
               // for (int i = 0; i < 3; i++)
-              if (model.nutrient != null) WidgetHelper().keyValueText(AppStrings.nutrient, model.nutrient),
-              if (model.symptomsOfDeficiency != null) WidgetHelper().keyValueText(AppStrings.symptomsOfDeficiency, model.symptomsOfDeficiency),
+              WidgetHelper().keyValueText(AppStrings.nutrient, model.nutrient),
+              WidgetHelper().keyValueText(AppStrings.symptomsOfDeficiency, model.symptomsOfDeficiency),
 
-              if (model.preventiveMeasures != null) WidgetHelper().keyValueText(AppStrings.preventiveMeasures, model.preventiveMeasures),
+              WidgetHelper().keyValueText(AppStrings.preventiveMeasures, model.preventiveMeasures),
             ],
           ).p(5),
         )

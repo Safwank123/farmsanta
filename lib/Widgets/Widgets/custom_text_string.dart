@@ -15,7 +15,7 @@ class CustomTextString extends StatelessWidget {
   bool underLine;
   TextStyle? style;
   CustomTextString({
-    Key? key,
+    super.key,
     required this.text,
     this.bold = false,
     this.capatilize = false,
@@ -25,7 +25,7 @@ class CustomTextString extends StatelessWidget {
     this.showLine = false,
     this.underLine = false,
     this.style,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

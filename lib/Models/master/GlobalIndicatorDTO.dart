@@ -50,9 +50,7 @@ class GlobalIndicatorDTO {
             ? DateTime.parse(json['endDate'])
             : DateTime.now(),
         tenantId: json['tenantId'],
-        sequenceNumber: json['sequenceNumber'] != null
-            ? json['sequenceNumber'].toInt()
-            : null,
+        sequenceNumber: json['sequenceNumber']?.toInt(),
         name: json['name'] != null ? json['name'] as String : null,
         description:
             json['description'] != null ? json['description'] as String : null,
@@ -79,9 +77,7 @@ class GlobalIndicatorDTO {
             ? DateTime.fromMillisecondsSinceEpoch(json['endDate'])
             : DateTime.now(),
         tenantId: json['tenantId'],
-        sequenceNumber: json['sequenceNumber'] != null
-            ? json['sequenceNumber'].toInt()
-            : null,
+        sequenceNumber: json['sequenceNumber']?.toInt(),
         name: json['name'] != null ? json['name'] as String : null,
         description:
             json['description'] != null ? json['description'] as String : null,

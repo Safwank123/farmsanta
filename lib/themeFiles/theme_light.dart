@@ -12,8 +12,6 @@ ThemeData lightTheme() {
     colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor, background: lintLightColor),
     scaffoldBackgroundColor: backgroundLightColor,
-
-    dialogBackgroundColor: backgroundLightColor,
     fontFamily: 'Roboto',
     chipTheme: ChipThemeData(
         backgroundColor: whiteColor,
@@ -130,7 +128,7 @@ ThemeData lightTheme() {
 
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(primaryColor))),
+            foregroundColor: WidgetStateProperty.all(primaryColor))),
     appBarTheme: const AppBarTheme(
         color: primaryColor,
         //titleTextStyle: Theme.of(context).textTheme.bodyLarge,
@@ -208,6 +206,6 @@ ThemeData lightTheme() {
         backgroundColor: backgroundLightColor,
         actionTextColor: primaryColor),
     tabBarTheme: TabBarThemeData(
-        labelColor: AppColors.primary, unselectedLabelColor: AppColors.gray),
+        labelColor: AppColors.primary, unselectedLabelColor: AppColors.gray), dialogTheme: DialogThemeData(backgroundColor: backgroundLightColor),
   );
 }

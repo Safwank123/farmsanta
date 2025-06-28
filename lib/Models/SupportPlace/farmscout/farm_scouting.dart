@@ -49,7 +49,7 @@ class FarmScouting {
 
   factory FarmScouting.fromJson(Map<String, dynamic> json) {
     return FarmScouting(
-      id: json['id'] != null ? json['id'].toInt() : null,
+      id: json['id']?.toInt(),
       uuid: json['uuid'] != null ? json['uuid'] as String : null,
       createdBy: json['createdBy'] != null ? json['createdBy'] as String : null,
       updatedBy: json['updatedBy'] != null ? json['updatedBy'] as String : null,
@@ -73,7 +73,7 @@ class FarmScouting {
           : null,
       farmerId: json['farmerId'] != null ? json['farmerId'] as String : '',
       advisoryExist:
-          json['advisoryExist'] != null ? json['advisoryExist'] : false,
+          json['advisoryExist'] ?? false,
       region: json['region'] != null ? List<String>.from(json['region']) : null,
       territory: json['territory'] != null
           ? List<String>.from(json['territory'])

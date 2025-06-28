@@ -12,9 +12,9 @@ class Area {
   }
 
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['unit'] = this.unit;
-    data['uom'] = this.uom;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['unit'] = unit;
+    data['uom'] = uom;
     return data;
   }
 

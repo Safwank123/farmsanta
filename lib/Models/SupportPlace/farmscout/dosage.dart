@@ -6,7 +6,7 @@ class Dosage {
 
   factory Dosage.fromJson(Map<String, dynamic> json) {
     return Dosage(
-      unit: json['unit'] != null ? json['unit'].toInt() : null,
+      unit: json['unit']?.toInt(),
       uom: json['uom'] != null ? json['uom'] as String : null,
     );
   }

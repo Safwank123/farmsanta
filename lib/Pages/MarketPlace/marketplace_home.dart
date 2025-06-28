@@ -24,7 +24,7 @@ import 'category_page.dart';
 class MarketPlaceHome extends BaseScreen {
   bool isPurchase;
   PurchaseOrderModel purchaseOrderModel;
-  MarketPlaceHome({required this.isPurchase, required this.purchaseOrderModel});
+  MarketPlaceHome({super.key, required this.isPurchase, required this.purchaseOrderModel});
 
   @override
   BaseScreenState<MarketPlaceHome> createState() => _MarketPlaceHomeState();

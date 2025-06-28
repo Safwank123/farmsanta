@@ -1,4 +1,3 @@
-
 import 'package:farmsanta_new/Constants/enums.dart';
 import 'package:farmsanta_new/Core/store.dart';
 import 'package:farmsanta_new/Models/SupportPlace/POP/PopDetailsDTO.dart';
@@ -15,6 +14,8 @@ class StoreHelper {
         return store.educationLevel;
       case SignUpEnum.uom:
         return store.uomList;
+      case SignUpEnum.gender: // ✅ added gender case
+        return store.genders;
     }
   }
 
@@ -33,15 +34,12 @@ class StoreHelper {
     }
   }
 
-  static savePop(PoPModel model) {
-    //TODO reconfig it
-    //upddate api named bookmarked
+  static void savePop(PoPModel model) {
     store.savedPopList.add(model);
   }
 
   static String getCropName(String uuid) {
     try {
-
       return store.cropList
           .firstWhere((element) => element.uuid == uuid)
           .cropName!;
@@ -49,9 +47,9 @@ class StoreHelper {
       return "N/A";
     }
   }
+
   static String getGrowthStage(String uuid) {
     try {
-
       return store.cropStageList
           .firstWhere((element) => element.uuid == uuid)
           .name!;
@@ -61,4 +59,9 @@ class StoreHelper {
   }
 }
 
-enum SignUpEnum { education, uom }
+// ✅ Updated Enum
+enum SignUpEnum {
+  education,
+  uom,
+  gender, // added for gender dropdown
+}

@@ -8,7 +8,7 @@ import '../../base_screen.dart';
 class StoreFilterPage extends StatefulWidget  {
   final List<StoreCardModel> storeList;
       
-  StoreFilterPage({required this.storeList});
+  const StoreFilterPage({super.key, required this.storeList});
 
   @override
   State<StoreFilterPage> createState() => _StoreFilterPageState();

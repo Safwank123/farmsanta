@@ -9,7 +9,6 @@ import '/Widgets/Widgets/custom_text.dart';
 import '/Widgets/classes/widget_helper_class.dart';
 import '/themeFiles/app_colors.dart';
 import './common.dart';
-import '../../../../../Constants/arrays.dart';
 import '../../../../../Constants/strings.dart';
 import '../../../../../Functions/common.dart';
 import '../../../Models/SupportPlace/calculator/FertilizerGeneratedReport.dart';

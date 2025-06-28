@@ -19,7 +19,7 @@ import '../base_screen.dart';
 
 class FarmStore extends BaseScreen {
   final StoreModel store;
-  const FarmStore({Key? key, required this.store}) : super(key: key);
+  const FarmStore({super.key, required this.store});
 
   @override
   BaseScreenState<FarmStore> createState() => _FarmStoreState();

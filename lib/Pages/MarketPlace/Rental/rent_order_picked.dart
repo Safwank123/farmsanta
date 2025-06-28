@@ -19,7 +19,7 @@ import '../../base_screen.dart';
 
 class RentOrderPicked extends BaseScreen {
   bool isPurchase;
-  RentOrderPicked({Key? key, required this.isPurchase}) : super(key: key);
+  RentOrderPicked({super.key, required this.isPurchase});
 
   @override
   BaseScreenState<RentOrderPicked> createState() => _RentOrderPickedState();

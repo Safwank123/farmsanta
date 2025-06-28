@@ -19,7 +19,7 @@ import 'pop_details.dart';
 class PopCardScreen extends BaseScreen {
   static const String routeName = "/pop-card";
   final PoPModel model;
-  const PopCardScreen({Key? key, required this.model}) : super(key: key);
+  const PopCardScreen({super.key, required this.model});
 
   @override
   BaseScreenState<PopCardScreen> createState() => _PopCardScreenState();

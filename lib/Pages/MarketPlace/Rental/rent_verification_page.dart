@@ -18,7 +18,7 @@ import '../../base_screen.dart';
 import '../marketplace_checkout.dart';
 
 class RentVerificationScreen extends BaseScreen {
-  const RentVerificationScreen({Key? key}) : super(key: key);
+  const RentVerificationScreen({super.key});
 
   @override
   BaseScreenState<RentVerificationScreen> createState() =>

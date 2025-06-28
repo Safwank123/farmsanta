@@ -10,7 +10,7 @@ class PriceCurrency {
   factory PriceCurrency.fromJson(Map<String, dynamic> json) {
     return PriceCurrency(
       currency: json['currency'] != null ? json['currency'] as String : null,
-      value: json['value'] != null ? json['value']!.toInt() : null,
+      value: json['value']?.toInt(),
     );
   }
 

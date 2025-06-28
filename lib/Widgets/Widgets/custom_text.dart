@@ -22,7 +22,7 @@ class CustomText extends StatelessWidget {
   int lines;
 
   CustomText({
-    Key? key,
+    super.key,
     required this.textKey,
     this.bold = false,
     this.capatilize = false,
@@ -35,7 +35,7 @@ class CustomText extends StatelessWidget {
     this.style,
     this.overflow = TextOverflow.visible,
     this.lines = 100,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

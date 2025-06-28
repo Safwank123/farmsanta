@@ -3,7 +3,7 @@ import 'package:farmsanta_new/themeFiles/app_colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseScreen extends StatefulWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+  const BaseScreen({super.key});
 
   @override
   State<StatefulWidget> createState();
@@ -48,12 +48,12 @@ abstract class BaseScreenState<Page extends BaseScreen> extends State<Page> {
     }
   }
 
-  getData() async {
+  Future<void> getData() async {
 
   }
 
 
-  getLocalData() async {
+  Future<void> getLocalData() async {
 
 
   }

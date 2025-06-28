@@ -9,7 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_material_symbols/flutter_material_symbols.dart';
 
 class BottomNav extends StatefulWidget {
-  BottomNav({super.key});
+  const BottomNav({super.key});
 
   @override
   State<BottomNav> createState() => _BottomNavState();

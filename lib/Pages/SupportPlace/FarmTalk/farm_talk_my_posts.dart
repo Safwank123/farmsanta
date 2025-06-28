@@ -50,7 +50,7 @@ class _MyPostsState extends BaseScreenState<MyPosts>
             // Stack
             Stack(
               children: [
-                Container(
+                SizedBox(
                   height: height * 0.35,
                   child: Column(
                     children: [

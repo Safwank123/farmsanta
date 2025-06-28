@@ -28,7 +28,7 @@ class CrudApi {
       var response =
           await createPostRequest(url ?? crudUrl!, json.encode(data));
       print(
-          "create request url - ${response.request!.url}\nrequest body- ${data}\nstatus code - ${response.statusCode}\nresponse body - ${response.body}");
+          "create request url - ${response.request!.url}\nrequest body- $data\nstatus code - ${response.statusCode}\nresponse body - ${response.body}");
       return response;
     } catch (e) {
       return null;
@@ -43,7 +43,7 @@ class CrudApi {
     try {
       var response = await createPutRequest(crudUrl!, json.encode(data));
       print(
-          "update request url - ${response.request!.url}\nrequest body- ${data}\nstatus code - ${response.statusCode}\nresponse body - ${response.body}");
+          "update request url - ${response.request!.url}\nrequest body- $data\nstatus code - ${response.statusCode}\nresponse body - ${response.body}");
 
       return response;
     } catch (e) {}
@@ -103,7 +103,7 @@ class CrudApi {
 }
 
 ////// CREATING CRUD REQUEST WITH/WITHOUT AUTH TOKENS //////////
-headers() {
+Map<String, String> headers() {
   return {
     'accept': '*/*',
     'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ Future<http.Response> createGetRequest(String url,
     header.remove("authToken");
   }
 
-  print("url is ${url} $header");
+  print("url is $url $header");
   return await http.get(
     Uri.parse(url),
     headers: header,

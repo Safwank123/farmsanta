@@ -8,7 +8,6 @@ import 'package:farmsanta_new/themeFiles/app_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../../../Constants/arrays.dart';
 import '../../../Constants/strings.dart';
 import '../../../Services/store_helper.dart';
 

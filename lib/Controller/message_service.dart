@@ -307,7 +307,7 @@ class MessageController {
   }
 
   static Future<bool> saveMessageDislike(String uuid, String languageId) async {
-    String url = ApiConstants.saveMessageDislike + "/$uuid";
+    String url = "${ApiConstants.saveMessageDislike}/$uuid";
 
     try {
       var response = await MessageServiceApi.instance.post(

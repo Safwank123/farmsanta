@@ -15,7 +15,7 @@ import '../base_screen.dart';
 
 class MarketPlaceRequestSent extends BaseScreen {
   bool isPurchase;
-  MarketPlaceRequestSent({required this.isPurchase});
+  MarketPlaceRequestSent({super.key, required this.isPurchase});
 
   @override
   BaseScreenState<MarketPlaceRequestSent> createState() =>
@@ -26,9 +26,9 @@ class _MarketPlaceRequestSentState
     extends BaseScreenState<MarketPlaceRequestSent> {
   @override
   Widget buildWidget(BuildContext context) {
-    if (widget.isPurchase)
+    if (widget.isPurchase) {
       StoreHelper.store.purchaseOrderList[0].status = "order confirmed";
-    else if (rentalOrderList[0].delivery)
+    } else if (rentalOrderList[0].delivery)
       rentalOrderList[0].status = "delivered";
     else
       rentalOrderList[0].status = "ready for pickup";

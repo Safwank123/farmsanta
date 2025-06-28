@@ -7,7 +7,7 @@ class SharedPref {
   static late Map<String, String> languageMap;
 
   //initilizate sharedpreference
-  static init() async {
+  static Future<void> init() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
@@ -51,7 +51,7 @@ class SharedPref {
   }
 
   //SETTING USER DETAILS
-  static setModelData(dynamic model,SharedPrefKeys key) async {
+  static Future<void> setModelData(dynamic model,SharedPrefKeys key) async {
     await sharedPreferences.setString(
         key.name, jsonEncode(model.toMap()).toString());
   }

@@ -78,9 +78,7 @@ class CategoryItem {
 
   factory CategoryItem.fromJson(Map<String, dynamic> json) {
     return CategoryItem(
-      sequenceNumber: json['sequenceNumber'] != null
-          ? json['sequenceNumber'].toInt()
-          : null,
+      sequenceNumber: json['sequenceNumber']?.toInt(),
       globalIndicatorUuid: json['globalIndicatorUuid'] != null
           ? json['globalIndicatorUuid'] as String
           : null,

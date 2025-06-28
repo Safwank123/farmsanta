@@ -13,7 +13,7 @@ import '../../../themeFiles/app_typography.dart';
 
 class AddFilterScreen extends BaseScreen {
   static const routeName = "/crop-advisory-filter-bottom-sheet";
-  const AddFilterScreen({Key? key}) : super(key: key);
+  const AddFilterScreen({super.key});
   @override
   BaseScreenState<AddFilterScreen> createState() => _AddFilterScreenState();
 }

@@ -18,7 +18,7 @@ import '../base_screen.dart';
 class EditProfile extends BaseScreen {
   static const String routeName = "/edit-profile";
   final UserModel user;
-  const EditProfile({required this.user, Key? key}) : super(key: key);
+  const EditProfile({required this.user, super.key});
 
   @override
   BaseScreenState<EditProfile> createState() => _EditProfileState();

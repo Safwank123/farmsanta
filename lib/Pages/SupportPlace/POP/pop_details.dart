@@ -22,8 +22,7 @@ class PopDetailScreen extends BaseScreen {
   static const String routeName = "/pop-details";
   final PoPModel model;
   int currentPageIndex;
-  PopDetailScreen({Key? key, required this.model, this.currentPageIndex = 0})
-      : super(key: key);
+  PopDetailScreen({super.key, required this.model, this.currentPageIndex = 0});
 
   @override
   BaseScreenState<PopDetailScreen> createState() => _PopDetailScreenState();

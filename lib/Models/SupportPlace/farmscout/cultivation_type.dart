@@ -22,7 +22,7 @@ class CultivationType {
   factory CultivationType.fromJson(Map<String, dynamic> json) {
     return CultivationType(
       id: json['id'] != null ? json['id'] as String : '',
-      userId: json['userId'] != null ? json['userId'] : null,
+      userId: json['userId'],
       lastUpdated:
           json['lastUpdated'] != null ? json['lastUpdated'] as String : '',
       type: json['type'] != null ? json['type'] as String : '',
@@ -31,12 +31,12 @@ class CultivationType {
           json['parentType'] != null ? json['parentType'] as String : '',
       parentValue:
           json['parentValue'] != null ? json['parentValue'] as String : '',
-      attributes: json['attributes'] != null ? json['attributes'] : null,
+      attributes: json['attributes'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['userId'] = userId;
     data['lastUpdated'] = lastUpdated;

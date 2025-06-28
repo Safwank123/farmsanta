@@ -18,7 +18,7 @@ import '../base_screen.dart';
 
 class SplashScreen extends BaseScreen {
   static String routeName = '/';
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
   @override
   BaseScreenState<SplashScreen> createState() => SplashScreenState();
 }
@@ -39,7 +39,7 @@ class SplashScreenState extends BaseScreenState<SplashScreen> {
     startTimer();
   }
 
-  startTimer() async {
+  Future<void> startTimer() async {
     print("called start timer");
     await MasterController.getTerritoriesList();
     await MasterController.getLanguages();

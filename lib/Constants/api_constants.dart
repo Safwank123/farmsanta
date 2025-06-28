@@ -248,7 +248,7 @@ class ApiConstants {
 // get farm scouting URL
   static String imageBaseUrl = "https://storage.googleapis.com/fs-cms-media/";
 
-  static String chat = "https://b25f7e159195.ngrok.io/" + "chatbot";
+  static String chat = "https://b25f7e159195.ngrok.io/" "chatbot";
   static String uploadFarmScoutPic = "${baseStorage}upload-media";
 
   // TODO: add farm scout URL to image

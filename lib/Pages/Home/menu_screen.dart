@@ -239,6 +239,7 @@ class _MenuScreenState extends BaseScreenState<MenuScreen> {
                       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     );
                   }
+                  return null;
                 },
               ),
             ),

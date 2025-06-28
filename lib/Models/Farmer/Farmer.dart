@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'Land.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Farmer {
   String? address;

@@ -2,36 +2,17 @@
 import 'package:farmsanta_new/Models/MarketPlace/review_model.dart';
 import 'package:farmsanta_new/Models/MarketPlace/store_model.dart';
 
-import '../Models/Common/cardmodel.dart';
-import '../Models/Common/crop_model.dart';
-import '../Models/Common/farm_model.dart';
 import '../Models/MarketPlace/Purchase/purchase_order_model.dart';
 import '../Models/MarketPlace/Rental/rental_order_model.dart';
 import '../Models/MarketPlace/SoilTesting/lab_model.dart';
 import '../Models/MarketPlace/SoilTesting/soil_test_booking_model.dart';
 import '../Models/MarketPlace/category_model.dart';
 import '../Models/MarketPlace/offer_model.dart';
-import '../Models/MarketPlace/product_model.dart';
 import '../Models/MarketPlace/variant_model.dart';
-import '../Models/SupportPlace/CropAdvisory/crop_advisory_model.dart';
-import '../Models/SupportPlace/farmscout/advisory_details.dart';
-import '../Models/SupportPlace/farmscout/advisory_table.dart';
-import '../Models/message/message.dart';
-import '../Models/tags/trendingTags.dart';
-import '../Models/SupportPlace/CropCalender/CropCalender.dart';
 import '../Models/SupportPlace/CropCalender/CropStageCalendar.dart';
-import '../Models/SupportPlace/Disease/Disease.dart';
-import '../Models/SupportPlace/master/CropMaster.dart';
-import '../Models/SupportPlace/calculator/FertilizerSourceDetails.dart';
 import '../Models/SupportPlace/calculator/FertilizerGeneratedReport.dart';
-import '../Models/SupportPlace/calculator/fertilizer_crop_controller_model.dart';
-import '../Models/SupportPlace/calculator/fertilizer_fruit_calculator.dart';
 import '../Models/SupportPlace/calculator/fertilizer_fruit_calculator_details.dart';
-import '../Models/SupportPlace/POP/PopDetailsDTO.dart';
-import '../Models/SupportPlace/POP/PopDto.dart';
-import '../Models/SupportPlace/farmscout/farm_scouting.dart';
 import '../Routes/image_routes.dart';
-import '../Services/store_helper.dart';
 import 'strings.dart';
 
 //language

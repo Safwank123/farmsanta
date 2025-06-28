@@ -12,7 +12,7 @@ import '../../../themeFiles/app_colors.dart';
 import '../../base_screen.dart';
 
 class SoilTestingPaidSuccessfully extends BaseScreen {
-  const SoilTestingPaidSuccessfully({Key? key}) : super(key: key);
+  const SoilTestingPaidSuccessfully({super.key});
 
   @override
   BaseScreenState<SoilTestingPaidSuccessfully> createState() => _SoilTestingPaidSuccessfullyState();

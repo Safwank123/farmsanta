@@ -57,12 +57,12 @@ class PoPModel {
 
   PoPModel.fromJson(Map<String, dynamic> json) {
     agronomyManager =
-        json['agronomyManager'] != null ? json['agronomyManager'] : null;
+        json['agronomyManager'];
     approvalAssignBy = json['approvalAssignBy'] != null
         ? json['approvalAssignBy'] as String
         : null;
     author = json['author'] != null ? json['author'] as String : null;
-    bookmarked = json['bookmarked'] != null ? json['bookmarked'] : null;
+    bookmarked = json['bookmarked'];
     content = json['content'] != null ? json['content'] as String : null;
     createdBy = json['createdBy'] != null ? json['createdBy'] as String : null;
     createdTimestamp = json['createdTimestamp'] != null
@@ -75,12 +75,12 @@ class PoPModel {
     cultivars =
         json['cultivars'] != null ? List<String>.from(json['cultivars']) : null;
     firstName = json['firstName'] != null ? json['firstName'] as String : null;
-    languageId = json['languageId'] != null ? json['languageId'].toInt() : null;
+    languageId = json['languageId']?.toInt();
     lastName = json['lastName'] != null ? json['lastName'] as String : null;
     if (json['photos'] != null) {
       photos = <Photos>[];
       json['photos'].forEach((v) {
-        photos!.add(new Photos.fromJson(v));
+        photos!.add(Photos.fromJson(v));
       });
     }
     profileImage =
@@ -88,7 +88,7 @@ class PoPModel {
     regions =
         json['regions'] != null ? List<String>.from(json['regions']) : null;
     status = json['status'] != null ? json['status'] as String : null;
-    superAdmin = json['superAdmin'] != null ? json['superAdmin'] : null;
+    superAdmin = json['superAdmin'];
     tags = json['tags'] != null ? List<String>.from(json['tags']) : null;
     tenantId = json['tenantId'] != null ? json['tenantId'] as String : null;
     territories = json['territories'] != null
@@ -103,34 +103,34 @@ class PoPModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['agronomyManager'] = this.agronomyManager;
-    data['approvalAssignBy'] = this.approvalAssignBy;
-    data['author'] = this.author;
-    data['bookmarked'] = this.bookmarked;
-    data['content'] = this.content;
-    data['createdBy'] = this.createdBy;
-    data['createdTimestamp'] = this.createdTimestamp;
-    data['crop'] = this.crop;
-    data['cultivarGroups'] = this.cultivarGroups;
-    data['cultivars'] = this.cultivars;
-    data['firstName'] = this.firstName;
-    data['languageId'] = this.languageId;
-    data['lastName'] = this.lastName;
-    if (this.photos != null) {
-      data['photos'] = this.photos!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['agronomyManager'] = agronomyManager;
+    data['approvalAssignBy'] = approvalAssignBy;
+    data['author'] = author;
+    data['bookmarked'] = bookmarked;
+    data['content'] = content;
+    data['createdBy'] = createdBy;
+    data['createdTimestamp'] = createdTimestamp;
+    data['crop'] = crop;
+    data['cultivarGroups'] = cultivarGroups;
+    data['cultivars'] = cultivars;
+    data['firstName'] = firstName;
+    data['languageId'] = languageId;
+    data['lastName'] = lastName;
+    if (photos != null) {
+      data['photos'] = photos!.map((v) => v.toJson()).toList();
     }
-    data['profileImage'] = this.profileImage;
-    data['regions'] = this.regions;
-    data['status'] = this.status;
-    data['superAdmin'] = this.superAdmin;
-    data['tags'] = this.tags;
-    data['tenantId'] = this.tenantId;
-    data['territories'] = this.territories;
-    data['title'] = this.title;
-    data['updatedBy'] = this.updatedBy;
-    data['updatedTimestamp'] = this.updatedTimestamp;
-    data['uuid'] = this.uuid;
+    data['profileImage'] = profileImage;
+    data['regions'] = regions;
+    data['status'] = status;
+    data['superAdmin'] = superAdmin;
+    data['tags'] = tags;
+    data['tenantId'] = tenantId;
+    data['territories'] = territories;
+    data['title'] = title;
+    data['updatedBy'] = updatedBy;
+    data['updatedTimestamp'] = updatedTimestamp;
+    data['uuid'] = uuid;
     return data;
   }
 }

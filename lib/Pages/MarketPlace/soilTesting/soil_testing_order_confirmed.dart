@@ -12,7 +12,7 @@ import '../../../themeFiles/app_colors.dart';
 import '../../base_screen.dart';
 
 class SoilTestingOrderConfirmed extends BaseScreen {
-  const SoilTestingOrderConfirmed({Key? key}) : super(key: key);
+  const SoilTestingOrderConfirmed({super.key});
 
   @override
   BaseScreenState<SoilTestingOrderConfirmed> createState() => _SoilTestingOrderConfirmedState();
@@ -67,7 +67,7 @@ class _SoilTestingOrderConfirmedState extends BaseScreenState<SoilTestingOrderCo
                     // back home button
                     TextButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                               side: BorderSide(

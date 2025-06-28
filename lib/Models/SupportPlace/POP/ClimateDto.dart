@@ -187,8 +187,8 @@ class MinMax {
   MinMax({this.max, this.min});
 
   MinMax.fromJson(Map<String, dynamic> json) {
-    max = json['max'] != null ? json['max']?.toDouble() : null;
-    min = json['min'] != null ? json['min']?.toDouble() : null;
+    max = json['max']?.toDouble();
+    min = json['min']?.toDouble();
   }
 
   Map<String, dynamic> toJson() {

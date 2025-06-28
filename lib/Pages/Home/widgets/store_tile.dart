@@ -8,7 +8,7 @@ class StoreListTile extends StatelessWidget {
   final double? ratings;
   final List<String>? cropList;
 
-  StoreListTile({
+  const StoreListTile({super.key, 
     this.storeName,
     this.imageUrl,
     this.distance,

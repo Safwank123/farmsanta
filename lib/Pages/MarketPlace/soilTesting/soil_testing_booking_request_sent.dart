@@ -11,7 +11,7 @@ import '../../base_screen.dart';
 
 
 class SoilTestingBookingRequestSent extends BaseScreen {
-  const SoilTestingBookingRequestSent({Key? key}) : super(key: key);
+  const SoilTestingBookingRequestSent({super.key});
 
   @override
   BaseScreenState<SoilTestingBookingRequestSent> createState() => _SoilTestingBookingRequestSentState();

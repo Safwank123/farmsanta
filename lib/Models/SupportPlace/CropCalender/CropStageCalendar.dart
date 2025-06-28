@@ -39,14 +39,14 @@ class CropStageCalendar {
         stageName:
             json["stageName"] != null ? json["stageName"] as String : null,
         stageStatus:
-            json["stageStatus"] != null ? json["stageStatus"].toInt() : null,
+            json["stageStatus"]?.toInt(),
         stageWeek:
             json["stageWeek"] != null ? json["stageWeek"] as String : null,
         startEndDate: json["startEndDate"] != null
             ? json["startEndDate"] as String
             : null,
         isCurrentTask:
-            json["isCurrentTask"] != null ? json["isCurrentTask"] : false,
+            json["isCurrentTask"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {

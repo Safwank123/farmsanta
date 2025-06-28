@@ -879,13 +879,13 @@ class _MarketPlaceOrderConfirmedDetail
                   ElevatedButton(
                     style: ButtonStyle(
                         fixedSize:
-                            MaterialStateProperty.all(Size(width * 0.45, 50)),
-                        shape: MaterialStateProperty.all(
+                            WidgetStateProperty.all(Size(width * 0.45, 50)),
+                        shape: WidgetStateProperty.all(
                           const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
-                        backgroundColor: MaterialStatePropertyAll(
+                        backgroundColor: WidgetStatePropertyAll(
                           AppColors.white,
                         )),
                     onPressed: () {},
@@ -900,13 +900,13 @@ class _MarketPlaceOrderConfirmedDetail
                   ElevatedButton(
                     style: ButtonStyle(
                         fixedSize:
-                            MaterialStateProperty.all(Size(width * 0.45, 50)),
-                        shape: MaterialStateProperty.all(
+                            WidgetStateProperty.all(Size(width * 0.45, 50)),
+                        shape: WidgetStateProperty.all(
                           const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
-                        backgroundColor: MaterialStatePropertyAll(
+                        backgroundColor: WidgetStatePropertyAll(
                           AppColors.pinkLight,
                         )),
                     onPressed: () {
@@ -961,13 +961,13 @@ class _MarketPlaceOrderConfirmedDetail
               ElevatedButton(
                 style: ButtonStyle(
                     fixedSize:
-                        MaterialStateProperty.all(Size(width * 0.95, 40)),
-                    shape: MaterialStateProperty.all(
+                        WidgetStateProperty.all(Size(width * 0.95, 40)),
+                    shape: WidgetStateProperty.all(
                       const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                       AppColors.red,
                     )),
                 onPressed: () {

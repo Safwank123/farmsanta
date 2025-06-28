@@ -186,7 +186,7 @@ class CardHelper {
         DateFormat('dd/MM/yyyy').format(model.updatedTimestamp!.toDate()!);
 
     //Bottom Sheet
-    void _menuOptions() {
+    void menuOptions() {
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -216,7 +216,7 @@ class CardHelper {
           Icon(
             CustomIcons.menu,
             color: AppColors.gray,
-          ).onTap(() => _menuOptions())
+          ).onTap(() => menuOptions())
         ]).w(width),
         10.heightBox,
 
@@ -292,7 +292,7 @@ class CardHelper {
     dynamic onTap,
   }) {
     //Bottom Sheet
-    void _comments() {
+    void comments() {
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -440,7 +440,7 @@ class CardHelper {
                   .cornerRadius(100)
                   .centered()
                   .onTap(() {
-                _comments();
+                comments();
               })),
         ],
       ).p(15).box.make().color(AppColors.background),

@@ -17,7 +17,7 @@ import '../../base_screen.dart';
 
 class AddCropCalender extends BaseScreen {
   static String routeName = '/add-crop-calender-screen';
-  const AddCropCalender({Key? key}) : super(key: key);
+  const AddCropCalender({super.key});
 
   @override
   State<AddCropCalender> createState() => _AddCropCalenderState();

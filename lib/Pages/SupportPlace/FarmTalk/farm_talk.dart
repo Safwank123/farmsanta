@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../../../Constants/arrays.dart';
 import '../../../Services/store_helper.dart';
 import '../../base_screen.dart';
 import '/Widgets/Widgets/custom_text.dart';

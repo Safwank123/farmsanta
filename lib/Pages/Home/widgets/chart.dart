@@ -4,8 +4,6 @@ import 'package:farmsanta_new/Widgets/Widgets/custom_text.dart';
 import 'package:farmsanta_new/themeFiles/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class ProductRateChart extends BaseScreen { 
   const ProductRateChart({super.key});

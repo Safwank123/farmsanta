@@ -70,7 +70,7 @@ class Advisory {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['uuid'] = uuid;
     data['createdBy'] = createdBy;
     data['updatedBy'] = updatedBy;

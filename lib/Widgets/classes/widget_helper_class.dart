@@ -61,7 +61,7 @@ class WidgetHelper {
     );
   }
 
-  static getTitlewithNumber(
+  static Row getTitlewithNumber(
       BuildContext context, String? title, int? itemNumber) {
     var color = AppThemeColors.getColor(AppThemeColorsEnum.primary);
     return Row(children: [
@@ -87,9 +87,9 @@ class WidgetHelper {
     ]);
   }
 
-  getBottomButton(String textKey, Function onClick) {
+  Padding getBottomButton(String textKey, Function onClick) {
     return CustomButtonElevated(text: textKey, onTap: onClick)
-        .pOnly(bottom: 5, left: 8, right: 8);
+        .pOnly(bottom: 5, left: 19, right: 8);
   }
 
   static TextStyle getTextStyle(bool bold, double size, Color color) {
@@ -369,7 +369,7 @@ class WidgetHelper {
   }
 
   //Image picker widget bottom sheet
-  static showAttachmentDialog(BuildContext context, Function getImage) {
+  static void showAttachmentDialog(BuildContext context, Function getImage) {
     showModalBottomSheet(
         context: context,
         shape: StyleHelper.cardShapeBorderTop(16),
@@ -409,7 +409,7 @@ class WidgetHelper {
   }
 
   //widget to get text field with title
-  static getNameAndInputField(
+  static List<Widget> getNameAndInputField(
       String name, TextEditingController controller, BuildContext context,
       {bool isEmail = false,
       bool isMob = false,
@@ -790,7 +790,7 @@ class WidgetHelper {
 
   //pop icon buttons
 
-  static iconButton(IconData icon, String title, dynamic onTap) {
+  static InkWell iconButton(IconData icon, String title, dynamic onTap) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

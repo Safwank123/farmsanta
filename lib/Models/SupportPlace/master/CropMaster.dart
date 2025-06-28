@@ -59,12 +59,8 @@ class CropDto {
         cropGroup:
             json["cropGroup"] != null ? json["cropGroup"] as String : null,
         cropName: json["cropName"] != null ? json["cropName"] as String : null,
-        fertilizerType: json["fertilizerType"] != null
-            ? json["fertilizerType"].toInt()
-            : null,
-        noOfCultivars: json["noOfCultivars"] != null
-            ? json["noOfCultivars"].toInt()
-            : null,
+        fertilizerType: json["fertilizerType"]?.toInt(),
+        noOfCultivars: json["noOfCultivars"]?.toInt(),
         photos: json["photos"] == null
             ? null
             : List<Photo>.from(json["photos"]!.map((x) => Photo.fromJson(x))),
@@ -100,12 +96,8 @@ class CropDto {
         cropGroup:
             json["cropGroup"] != null ? json["cropGroup"] as String : null,
         cropName: json["cropName"] != null ? json["cropName"] as String : null,
-        fertilizerType: json["fertilizerType"] != null
-            ? json["fertilizerType"].toInt()
-            : null,
-        noOfCultivars: json["noOfCultivars"] != null
-            ? json["noOfCultivars"].toInt()
-            : null,
+        fertilizerType: json["fertilizerType"]?.toInt(),
+        noOfCultivars: json["noOfCultivars"]?.toInt(),
         photos: json["photos"] == null
             ? null
             : List<Photo>.from(json["photos"]!.map((x) => Photo.fromJson(x))),
@@ -172,9 +164,9 @@ class Translation {
   });
 
   factory Translation.fromJson(Map<String, dynamic> json) => Translation(
-        id: json["id"] != null ? json["id"].toInt() : null,
+        id: json["id"]?.toInt(),
         languageId:
-            json["languageId"] != null ? json["languageId"].toInt() : null,
+            json["languageId"]?.toInt(),
         masterId: json["masterId"] != null ? json["masterId"] as String : null,
         translations: json["translations"] != null
             ? json["translations"] as String

@@ -29,10 +29,11 @@ class _MarketPlaceOrderConfirmedState
     extends BaseScreenState<MarketPlaceOrderConfirmed> {
   @override
   Widget buildWidget(BuildContext context) {
-    if (widget.isPurchase)
+    if (widget.isPurchase) {
       StoreHelper.store.purchaseOrderList[0].status = "order confirmed";
-    else
+    } else {
       rentalOrderList[0].status = "Pending confirmation";
+    }
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -81,7 +82,7 @@ class _MarketPlaceOrderConfirmedState
                     // back home button
                     TextButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                               side: BorderSide(

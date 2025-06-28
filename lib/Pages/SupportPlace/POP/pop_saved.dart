@@ -16,7 +16,7 @@ import 'pop_card.dart';
 
 class SavedPopScreen extends BaseScreen {
   static const String routeName = "/save-pop";
-  const SavedPopScreen({Key? key}) : super(key: key);
+  const SavedPopScreen({super.key});
 
   @override
   BaseScreenState<SavedPopScreen> createState() => _SavedPopScreenState();

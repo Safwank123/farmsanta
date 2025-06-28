@@ -45,7 +45,7 @@ class CroppingProcessDto {
             ? List<Process>.from(
                 json["processlist"].map((x) => Process.fromJson(x)))
             : [],
-        status: json["status"] != null ? json["status"] : false,
+        status: json["status"] ?? false,
         territory: json["territory"] != null ? json["territory"] as String : '',
       );
     } catch (e) {
@@ -66,7 +66,7 @@ class CroppingProcessDto {
             ? List<Process>.from(
                 json["processlist"].map((x) => Process.fromJson(x)))
             : [],
-        status: json["status"] != null ? json["status"] : false,
+        status: json["status"] ?? false,
         territory: json["territory"] != null ? json["territory"] as String : '',
       );
     }

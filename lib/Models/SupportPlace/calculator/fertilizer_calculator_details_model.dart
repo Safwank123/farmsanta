@@ -37,32 +37,30 @@ class FertilizerCalculatorDetailsDto {
 
   factory FertilizerCalculatorDetailsDto.fromJson(Map<String, dynamic> json) =>
       FertilizerCalculatorDetailsDto(
-        borronB: json["borronB"] != null ? json["borronB"].toInt() : null,
+        borronB: json["borronB"]?.toInt(),
         cropId: json["cropId"] != null ? json["cropId"] as String : null,
         daysAfter25:
-            json["daysAfter25"] != null ? json["daysAfter25"].toInt() : null,
+            json["daysAfter25"]?.toInt(),
         daysAfter40:
-            json["daysAfter40"] != null ? json["daysAfter40"].toInt() : null,
+            json["daysAfter40"]?.toInt(),
         fertilizerType: json["fertilizerType"] != null
             ? json["fertilizerType"] as String
             : null,
-        fym: json["fym"] != null ? json["fym"].toInt() : null,
-        id: json["id"] != null ? json["id"].toInt() : null,
-        lastploughing: json["lastploughing"] != null
-            ? json["lastploughing"].toInt()
-            : null,
-        nitroN: json["nitroN"] != null ? json["nitroN"].toInt() : null,
+        fym: json["fym"]?.toInt(),
+        id: json["id"]?.toInt(),
+        lastploughing: json["lastploughing"]?.toInt(),
+        nitroN: json["nitroN"]?.toInt(),
         phosphorusP:
-            json["phosphorusP"] != null ? json["phosphorusP"].toInt() : null,
+            json["phosphorusP"]?.toInt(),
         photassiumK:
-            json["photassiumK"] != null ? json["photassiumK"].toInt() : null,
-        status: json["status"] ?? null,
-        sulphurS: json["sulphurS"] != null ? json["sulphurS"].toInt() : null,
+            json["photassiumK"]?.toInt(),
+        status: json["status"],
+        sulphurS: json["sulphurS"]?.toInt(),
         timeOfsowing:
-            json["timeOfsowing"] != null ? json["timeOfsowing"].toInt() : null,
+            json["timeOfsowing"]?.toInt(),
         vermiCompose:
-            json["vermiCompose"] != null ? json["vermiCompose"].toInt() : null,
-        zincZn: json["zincZN"] != null ? json["zincZN"].toInt() : null,
+            json["vermiCompose"]?.toInt(),
+        zincZn: json["zincZN"]?.toInt(),
       );
 
   Map<String, dynamic> toJson() => {

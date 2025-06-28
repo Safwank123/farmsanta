@@ -23,8 +23,7 @@ class FarmTalkProfilePage extends BaseScreen {
   final Message message;
   final String username;
   const FarmTalkProfilePage(
-      {Key? key, required this.message, required this.username})
-      : super(key: key);
+      {super.key, required this.message, required this.username});
 
   @override
   BaseScreenState<FarmTalkProfilePage> createState() =>
@@ -106,6 +105,8 @@ class _FarmTalkProfilePageState extends BaseScreenState<FarmTalkProfilePage>
                 left: 0,
                 child: widget.username == AppStrings.farmsanta
                     ? CircleAvatar(
+                        radius: 41,
+                        backgroundColor: AppColors.white,
                         child: Image(
                           image: AssetImage(
                             ImageRoutes.mascotImage,
@@ -113,8 +114,6 @@ class _FarmTalkProfilePageState extends BaseScreenState<FarmTalkProfilePage>
                           height: 80,
                           width: 80,
                         ),
-                        radius: 41,
-                        backgroundColor: AppColors.white,
                       )
                     : Icon(
                         Icons.account_circle,
@@ -226,7 +225,7 @@ class _FarmTalkProfilePageState extends BaseScreenState<FarmTalkProfilePage>
     dynamic onTap,
   }) {
     //Bottom Sheet
-    void _comments() {
+    void comments() {
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -370,7 +369,7 @@ class _FarmTalkProfilePageState extends BaseScreenState<FarmTalkProfilePage>
                   .cornerRadius(100)
                   .centered()
                   .onTap(() {
-                _comments();
+                comments();
               })),
 
           //center arrow icon

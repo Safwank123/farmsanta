@@ -18,8 +18,7 @@ class CartPagePickUpOrder extends BaseScreen {
   final bool isPurchase;
   final int initialIndex;
   const CartPagePickUpOrder(
-      {Key? key, required this.isPurchase, required this.initialIndex})
-      : super(key: key);
+      {super.key, required this.isPurchase, required this.initialIndex});
 
   @override
   BaseScreenState<CartPagePickUpOrder> createState() =>
@@ -106,15 +105,16 @@ class _CartPagePickUpOrderState extends BaseScreenState<CartPagePickUpOrder>
               // pay now button
               TextButton(
                 onPressed: () {
-                  if (tabController.index == 1)
+                  if (tabController.index == 1) {
                     navigateToPageReplaceMent(RentVerificationScreen());
-                  else
+                  } else {
                     navigateToPageReplaceMent(MarketPlaceCheckout(
                       isPurchase: true,
                       purchaseOrderModel:
                           StoreHelper.store.purchaseOrderList[0],
                       rentalOrderModel: rentalOrderList[0],
                     ));
+                  }
                 },
                 child: CustomText(
                   textKey: tabController.index == 0

@@ -12,10 +12,10 @@ class Photos {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['caption'] = this.caption;
-    data['fileName'] = this.fileName;
-    data['photoId'] = this.photoId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['caption'] = caption;
+    data['fileName'] = fileName;
+    data['photoId'] = photoId;
     return data;
   }
 }

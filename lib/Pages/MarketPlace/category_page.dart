@@ -20,7 +20,7 @@ import 'marketplace_store_page.dart';
 class CategoryPage extends BaseScreen {
   bool isPurchase;
   PurchaseOrderModel purchaseOrderModel;
-  CategoryPage({required this.isPurchase, required this.purchaseOrderModel});
+  CategoryPage({super.key, required this.isPurchase, required this.purchaseOrderModel});
 
   @override
   BaseScreenState<CategoryPage> createState() => _CategoryPageState();
@@ -233,10 +233,11 @@ class _CategoryPageState extends BaseScreenState<CategoryPage> {
                                 : AppColors.rentalPrimary)
                             .cornerRadius(5)
                             .onTap(() {
-                              if(widget.isPurchase)
+                              if(widget.isPurchase) {
                                 MarketPlaceStorePage(isPurchase: widget.isPurchase, storeModel: purchaseStoreList[0],);
-                              else
+                              } else {
                                 MarketPlaceStorePage(isPurchase: widget.isPurchase, storeModel: rentalStoreList[0],);
+                              }
                         })
                       ])
                           .pSymmetric(h: 8, v: 4)
@@ -376,10 +377,8 @@ Widget productDetailWidget(
                 bold: true,
               ),
             CustomText(
-                textKey: StoreHelper.store.purchaseStoreList[i].products[j]
-                        .offersId!.percentageOff
-                        .toString() +
-                    "% off",
+                textKey: "${StoreHelper.store.purchaseStoreList[i].products[j]
+                        .offersId!.percentageOff}% off",
                 size: 1,
                 color: AppColors.primary,
                 style: TextStyle(fontSize: 1)),

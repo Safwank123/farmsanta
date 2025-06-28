@@ -50,18 +50,18 @@ class FertilizerSourceCalculatorDetailsDto {
   factory FertilizerSourceCalculatorDetailsDto.fromJson(
           Map<String, dynamic> json) =>
       FertilizerSourceCalculatorDetailsDto(
-        id: json["id"] != null ? json["id"].toInt() : null,
-        status: json["status"] != null ? json["status"] : null,
-        nitroN: json["nitroN"] != null ? json["nitroN"].toInt() : null,
+        id: json["id"]?.toInt(),
+        status: json["status"],
+        nitroN: json["nitroN"]?.toInt(),
         phosphorusP:
-            json["phosphorusP"] != null ? json["phosphorusP"].toDouble() : null,
+            json["phosphorusP"]?.toDouble(),
         photassiumK:
-            json["photassiumK"] != null ? json["photassiumK"].toDouble() : null,
-        zincZn: json["zincZn"] != null ? json["zincZn"].toInt() : null,
-        borronB: json["borronB"] != null ? json["borronB"].toDouble() : null,
-        sulphurS: json["sulphurS"] != null ? json["sulphurS"].toInt() : null,
-        lime: json["lime"] != null ? json["lime"].toInt() : null,
-        costKg: json["costKg"] != null ? json["costKg"].toDouble() : null,
+            json["photassiumK"]?.toDouble(),
+        zincZn: json["zincZn"]?.toInt(),
+        borronB: json["borronB"]?.toDouble(),
+        sulphurS: json["sulphurS"]?.toInt(),
+        lime: json["lime"]?.toInt(),
+        costKg: json["costKg"]?.toDouble(),
         territory:
             json["territory"] != null ? json["territory"] as String : null,
         fertilizerName: json["fertilizerName"] != null

@@ -43,6 +43,7 @@ class MasterController {
     } catch (e) {
       print("terriroty erorr ${e.toString()}");
     }
+    return null;
   }
 
   //get list of string name
@@ -442,14 +443,12 @@ class MasterController {
         var jsonResponse = jsonDecode(response.body);
         List<dynamic> recommendationsData = jsonResponse['data'];
 
-        if (recommendationsData != null) {
-          List<CropRecommendation> cropSpecificRecommendations =
-              recommendationsData
-                  .map((data) => CropRecommendation.fromJson(data))
-                  .toList();
-          return cropSpecificRecommendations;
-        }
-      }
+        List<CropRecommendation> cropSpecificRecommendations =
+            recommendationsData
+                .map((data) => CropRecommendation.fromJson(data))
+                .toList();
+        return cropSpecificRecommendations;
+            }
     } catch (e) {}
 
     return null;

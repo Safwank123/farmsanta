@@ -15,10 +15,6 @@ class Test extends BaseScreen {
 
 class _TestState extends BaseScreenState<Test> {
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
 
   @override
