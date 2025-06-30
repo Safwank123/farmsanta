@@ -545,50 +545,101 @@ Widget _buildGenderSection(Color primary) {
 
 
 
-Widget _buildFarmSection({required List<LandModel> lands, required VoidCallback rebuild}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      15.heightBox,
-      getRow(
-        "${AppStrings.myFarm.translate()} (${lands.length})",
-        AppStrings.addFarm,
-        () => navigateToAddFarm(rebuild),
-      ),
-      10.heightBox,
-      ...lands.map((farm) => _buildFarmCard(farm)).toList(),
-    ],
-  );
+
+
+
+
+// Add this helper method to your SignupScreenState class
+LatLng _calculateCentroid(List<LatLng> points) {
+  if (points.isEmpty) return LatLng(0, 0);
+  
+  double latSum = 0;
+  double lngSum = 0;
+  
+  for (final point in points) {
+    latSum += point.latitude;
+    lngSum += point.longitude;
+  }
+  
+  return LatLng(latSum / points.length, lngSum / points.length);
 }
 
+// Add this method to calculate polygon area for text sizing
+double _calculatePolygonArea(List<LatLng> polygon) {
+  if (polygon.length < 3) return 0;
+  
+  double area = 0;
+  for (int i = 0; i < polygon.length; i++) {
+    final p1 = polygon[i];
+    final p2 = polygon[(i + 1) % polygon.length];
+    area += (p1.longitude * p2.latitude) - (p1.latitude * p2.longitude);
+  }
+  
+  return area.abs() / 2;
+}
 
-
+// Add this method to build field labels
+Widget _buildFieldLabel(String text, Color color) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    decoration: BoxDecoration(
+      color: Colors.white.withOpacity(0.8),
+      borderRadius: BorderRadius.circular(4),
+      border: Border.all(color: color, width: 1),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1),
+          blurRadius: 2,
+          offset: const Offset(0, 1),
+        ),
+      ],
+    ),
+    child: Text(
+      text,
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: color,
+      ),
+      textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+    ),
+  );
+}
 
 Widget _buildFarmCard(LandModel farm) {
   final firstCoord = farm.coordinates.isNotEmpty ? farm.coordinates.first : null;
   final center = firstCoord != null
       ? LatLng(firstCoord.latitude, firstCoord.longitude)
-      : LatLng(10.8505, 76.2711); // Default center: Kerala
+      : LatLng(10.8505, 76.2711);
 
-  final List<LatLng> boundaryPoints = farm.coordinates
+  final boundaryPoints = farm.coordinates
       .map((c) => LatLng(c.latitude, c.longitude))
       .toList();
+
+  final primaryColor = AppThemeColors.getColor(AppThemeColorsEnum.primary);
+  final subLandColors = [
+    Colors.blue.shade600,
+    Colors.green.shade600,
+    Colors.orange.shade600,
+    Colors.purple.shade600,
+    Colors.teal.shade600,
+  ];
 
   return FutureBuilder<String>(
     future: getLocationName(center),
     builder: (context, snapshot) {
-      final locationName = snapshot.data ?? "Loading...";
-
       return Container(
-        padding: const EdgeInsets.all(12),
-        margin: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.15),
-              blurRadius: 6,
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
@@ -596,91 +647,139 @@ Widget _buildFarmCard(LandModel farm) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            8.heightBox,
-            Text(
-  "📍 Location: (${center.latitude.toStringAsFixed(4)}, ${center.longitude.toStringAsFixed(4)})",
-  style: const TextStyle(fontWeight: FontWeight.bold),
-),
-            10.heightBox,
-            if (firstCoord != null)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: SizedBox(
-                  height: 200,
-                  width: double.infinity,
-                  child: FlutterMap(
-                    options: MapOptions(
-                      initialCenter: center,
-                      initialZoom: 15.0,
-                      interactionOptions: const InteractionOptions(
-                        flags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
-                      ),
+            // Header without farm name
+            Row(
+              children: [
+                Icon(Icons.agriculture, color: primaryColor, size: 24),
+                const SizedBox(width: 8),
+                Icon(Icons.arrow_forward_ios, 
+                    color: Colors.grey.shade400, size: 16),
+              ],
+            ),
+            const SizedBox(height: 12),
+            
+            // Interactive Map
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                height: 220,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade200, width: 1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: FlutterMap(
+                  options: MapOptions(
+                    initialCenter: center,
+                    initialZoom: 15.0,
+                    interactionOptions: const InteractionOptions(
+                      flags: InteractiveFlag.all,
                     ),
-                    children: [
-                      TileLayer(
-                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        userAgentPackageName: 'com.example.farmsanta_new',
-                      ),
-                      if (boundaryPoints.length >= 3)
-                        PolygonLayer(
-                          polygons: [
-                            Polygon(
-                              points: boundaryPoints,
-                              color: Colors.green.withOpacity(0.3),
-                              borderColor: Colors.green,
-                              borderStrokeWidth: 2,
-                            ),
-                          ],
-                        ),
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: center,
-                            width: 160,
-                            height: 60,
-                            child: Column(
-                              children: [
-                                // ✅ This shows the location name directly on the map
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(6),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 4,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Text(
-                                    locationName,
-                                    style: const TextStyle(fontSize: 12),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                const Icon(Icons.location_on, color: Colors.red, size: 32),
-                              ],
-                            ),
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      subdomains: ['a', 'b', 'c'],
+                    ),
+                    
+                    // Main land polygon (without label)
+                    if (boundaryPoints.length >= 3)
+                      PolygonLayer(
+                        polygons: [
+                          Polygon(
+                            points: boundaryPoints,
+                            color: primaryColor.withOpacity(0.2),
+                            borderColor: primaryColor,
+                            borderStrokeWidth: 3,
                           ),
                         ],
                       ),
+                    
+                    // Sub-lands with labels
+                    if (farm.subLands.isNotEmpty)
+                      PolygonLayer(
+                        polygons: [
+                          for (var i = 0; i < farm.subLands.length; i++)
+                            Polygon(
+                              points: farm.subLands[i].coordinates
+                                  .map((c) => LatLng(c.latitude, c.longitude))
+                                  .toList(),
+                              color: subLandColors[i % subLandColors.length]
+                                  .withOpacity(0.2),
+                              borderColor: subLandColors[i % subLandColors.length],
+                              borderStrokeWidth: 2,
+                            ),
+                        ],
+                      ),
+                    
+                    // Sub-land labels with arrows (keeping these)
+                    if (farm.subLands.isNotEmpty)
+                      MarkerLayer(
+                        markers: [
+                          for (var i = 0; i < farm.subLands.length; i++)
+                            if (farm.subLands[i].coordinates.isNotEmpty)
+                              Marker(
+                                point: _calculateCentroid(
+                                    farm.subLands[i].coordinates
+                                        .map((c) => LatLng(c.latitude, c.longitude))
+                                        .toList()),
+                                width: 120,
+                                height: 60,
+                                child: Column(
+                                  children: [
+                                    _buildFieldLabel(
+                                      farm.subLands[i].landName,
+                                      subLandColors[i % subLandColors.length],
+                                    ),
+                                    Icon(Icons.arrow_drop_down, 
+                                        color: subLandColors[i % subLandColors.length], 
+                                        size: 20),
+                                  ],
+                                ),
+                              ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            
+            // Footer information
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.location_on, size: 16, color: Colors.grey.shade600),
+                      const SizedBox(width: 4),
+                      Text(
+                        "${center.latitude.toStringAsFixed(4)}, "
+                        "${center.longitude.toStringAsFixed(4)}",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              )
-            else
-              const Text("⚠ No coordinates available."),
-            10.heightBox,
-            Text("🧭 Total Coordinates: ${farm.coordinates.length}"),
+                  if (farm.subLands.isNotEmpty)
+                    Text(
+                      "${farm.subLands.length} Sub-plots",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ],
         ),
       );
     },
   );
 }
-
 
 Future<String> getLocationName(LatLng coords) async {
   try {
@@ -752,31 +851,144 @@ Future<String> getLocationName(LatLng coords) async {
     }
   }
 
-Future<void> navigateToAddFarm(VoidCallback updateState) async {
-  try {
-    final status = await Permission.location.request();
-
-    if (status == PermissionStatus.granted) {
-      StoreHelper.store.position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation,
-      );
-
-      final result = await StyleHelper.navigateToPageWithoutReplaceMentNamed(FarmDrawScreen.routeName);
-
-      if (result != null && result is LandModel) {
-        lands.add(result);          // ✅ add to top-level list
-        updateState();              // ✅ trigger UI refresh
-        StyleHelper.showToast("Farm added successfully!");
-      }
-    } else {
-      StyleHelper.showToast("Location permission is required.");
-    }
-  } catch (e) {
-    debugPrint('Farm navigation error: $e');
-    StyleHelper.showToast("Failed to add farm location.");
-  }
+Widget _buildFarmSection({required List<LandModel> lands, required VoidCallback rebuild}) {
+  final primaryColor = AppThemeColors.getColor(AppThemeColorsEnum.primary);
+  
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      15.heightBox,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomText(
+            textKey: "${AppStrings.myFarm.translate()} (${lands.length})",
+            color: primaryColor,
+            bold: true,
+          ),
+          if (cropsSelected.isNotEmpty)
+            CustomText(
+              textKey: AppStrings.addFarm,
+              color: primaryColor,
+              bold: true,
+            ).onInkTap(() => navigateToAddFarm(rebuild)),
+          if (cropsSelected.isEmpty)
+            Tooltip(
+              message: "Please select crops first",
+              child: CustomText(
+                textKey: AppStrings.addFarm,
+                color: Colors.grey,
+                bold: true,
+              ),
+            ),
+        ],
+      ),
+      
+      10.heightBox,
+      
+      if (lands.isEmpty)
+        Container(
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            children: [
+              Icon(Icons.agriculture, size: 48, color: Colors.grey),
+              10.heightBox,
+              CustomText(
+                textKey: "No farms added yet",
+                color: Colors.grey,
+              ),
+              if (cropsSelected.isEmpty)
+                Column(
+                  children: [
+                    10.heightBox,
+                    CustomText(
+                      textKey: "Select crops first to add farms",
+                      color: Colors.grey.shade600,
+                     // fontSize: 12,
+                    ),
+                  ],
+                ),
+            ],
+          ).centered(),
+        ),
+      
+      ...lands.map((farm) => _buildFarmCard(farm)).toList(),
+      
+      // Show available crops if none selected
+      if (cropsSelected.isEmpty) ...[
+        20.heightBox,
+        CustomText(
+          textKey: "Available Crops:",
+          color: primaryColor,
+          bold: true,
+        ),
+        10.heightBox,
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: StoreHelper.store.cropsListSelected
+              .take(5) // Show first 5 crops as examples
+              .map((crop) => Chip(
+                    label: Text(crop.cropName),
+                    avatar: CircleAvatar(
+                      backgroundImage: crop.imagePath.startsWith('http')
+                          ? NetworkImage(crop.imagePath) as ImageProvider
+                          : AssetImage(crop.imagePath),
+                    ),
+                  ))
+              .toList(),
+        ),
+        10.heightBox,
+        CustomText(
+          textKey: "Select at least one crop to add farms",
+          color: Colors.grey.shade600,
+         // fontSize: 12,
+        ),
+      ],
+    ],
+  );
 }
 
+Future<void> navigateToAddFarm(VoidCallback updateState) async {
+  if (cropsSelected.isEmpty) {
+    StyleHelper.showToast("Please select crops first");
+    return;
+  }
+
+  try {
+    final status = await Permission.location.request();
+    if (status != PermissionStatus.granted) {
+      StyleHelper.showToast("Location permission required");
+      return;
+    }
+
+    StoreHelper.store.position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.bestForNavigation,
+    );
+
+    // Pass the selected crops to the FarmDrawScreen
+    final result = await Navigator.pushNamed(
+      context,
+      FarmDrawScreen.routeName,
+      arguments: cropsSelected, // Pass the selected crops as arguments
+    );
+    
+    if (result != null && result is LandModel) {
+      setState(() {
+        lands.add(result);
+        updateState();
+      });
+      StyleHelper.showToast("Farm added successfully");
+    }
+  } catch (e) {
+    debugPrint('Error adding farm: $e');
+    StyleHelper.showToast("Failed to add farm");
+  }
+}
 
   Future<void> completeSignUp() async {
     if (!_validateInputs()) return;

@@ -14,6 +14,7 @@ class LandModel {
   List<String> documents;
   Area? area;
   List<Coordinate> coordinates;
+  List<LandModel> subLands; // Added subLands property
   List<Crop> crops;
 
   LandModel({
@@ -28,6 +29,7 @@ class LandModel {
     required this.documents,
     required this.area,
     required this.coordinates,
+    required this.subLands, // Added to constructor
     required this.crops,
   });
 
@@ -42,8 +44,9 @@ class LandModel {
       'unitOfMeasure': unitOfMeasure,
       'waterSource': waterSource,
       'documents': documents,
-      'area': area?.toMap(), // ✅ safer
+      'area': area?.toMap(),
       'coordinates': coordinates.map((x) => x.toMap()).toList(),
+      'subLands': subLands.map((x) => x.toMap()).toList(), // Added to serialization
       'crops': crops.map((x) => x.toMap()).toList(),
     };
   }
@@ -63,6 +66,9 @@ class LandModel {
       coordinates: map['coordinates'] != null
           ? List<Coordinate>.from(map['coordinates']?.map((x) => Coordinate.fromMap(x)))
           : [],
+      subLands: map['subLands'] != null // Added deserialization
+          ? List<LandModel>.from(map['subLands']?.map((x) => LandModel.fromMap(x)))
+          : [],
       crops: map['crops'] != null
           ? List<Crop>.from(map['crops']?.map((x) => Crop.fromMap(x)))
           : [],
@@ -73,7 +79,6 @@ class LandModel {
 
   factory LandModel.fromJson(Map<String, dynamic> source) => LandModel.fromMap(source);
 
-  /// ✅ Useful when modifying parts of the object (optional)
   LandModel copyWith({
     String? landId,
     String? landName,
@@ -86,6 +91,7 @@ class LandModel {
     List<String>? documents,
     Area? area,
     List<Coordinate>? coordinates,
+    List<LandModel>? subLands, // Added to copyWith
     List<Crop>? crops,
   }) {
     return LandModel(
@@ -100,12 +106,36 @@ class LandModel {
       documents: documents ?? this.documents,
       area: area ?? this.area,
       coordinates: coordinates ?? this.coordinates,
+      subLands: subLands ?? this.subLands,
       crops: crops ?? this.crops,
     );
   }
 
   @override
   String toString() {
-    return 'LandModel(landId: $landId, landName: $landName, location: $farmLocation, coordinates: ${coordinates.length})';
+    return 'LandModel(landId: $landId, landName: $landName, location: $farmLocation, '
+        'coordinates: ${coordinates.length}, subLands: ${subLands.length})';
+  }
+
+  // Helper method to create a minimal sub-land
+  static LandModel createSubLand({
+    required List<Coordinate> coordinates,
+    String landName = 'Sub-land',
+  }) {
+    return LandModel(
+      landId: 'sub-${DateTime.now().millisecondsSinceEpoch}',
+      landName: landName,
+      registrationNumber: '',
+      farmLocation: 'Sub-plot',
+      latitude: coordinates.isNotEmpty ? coordinates.first.latitude : 0.0,
+      longitude: coordinates.isNotEmpty ? coordinates.first.longitude : 0.0,
+      unitOfMeasure: 'acres',
+      waterSource: 'N/A',
+      documents: [],
+      area: null,
+      coordinates: coordinates,
+      subLands: [], // Sub-lands can't have nested sub-lands in this implementation
+      crops: [],
+    );
   }
 }

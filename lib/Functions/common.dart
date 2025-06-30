@@ -65,23 +65,15 @@ void navigateToPageWithoutReplaceMent(var newPage) {
       ));
 }
 
-Future navigateToPageWithoutReplaceMentNamed(var newPage) {
-  return Navigator.pushNamed(navigatorKey.currentContext!, newPage);
-}
-
-Future<String> uploadImageFunction(File? image) async {
-  if (image != null) {
-    var request = http.MultipartRequest('POST', Uri.parse(uploadImageUrl));
-    request.fields.addAll({'fileType': "image", 'documentSize': '10000'});
-    request.files.add(await http.MultipartFile.fromPath('file', image.path));
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      var data = await response.stream.bytesToString();
-      return jsonDecode(data)['name'];
-    }
-  }
-  return "";
+Future<dynamic> navigateToPageWithoutReplaceMentNamed(
+  String routeName, {
+  Object? arguments,  // Add this named parameter
+}) {
+  return Navigator.pushNamed(
+    navigatorKey.currentContext!,
+    routeName,
+    arguments: arguments,  // Pass the arguments
+  );
 }
 
 void directToScreenAccordingToNotification(String title) {

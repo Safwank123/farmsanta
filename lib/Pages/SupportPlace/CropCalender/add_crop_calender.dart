@@ -1,19 +1,30 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:farmsanta_new/Services/store_helper.dart';
+import 'package:farmsanta_new/Models/Common/crop_model.dart';
 import 'package:farmsanta_new/Widgets/Widgets/custom_button.dart';
 import 'package:farmsanta_new/Widgets/Widgets/custom_text.dart';
 import 'package:farmsanta_new/themeFiles/app_typography.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../../Constants/strings.dart';
 import '../../../../../Routes/image_routes.dart';
-import '../../../../../Widgets/classes/style_helper.dart';
 import '../../../../../themeFiles/app_colors.dart';
+import '../../../Widgets/classes/style_helper.dart';
 import '../../../Widgets/classes/widget_helper_class.dart';
 import '../../base_screen.dart';
+
+const List<CropModelShort> allCrops = [
+  CropModelShort(uuid: '1', cropName: 'Almond', imagePath: 'assets/images/crops/avacado.jpg'),
+  CropModelShort(uuid: '2', cropName: 'Avocado', imagePath: 'assets/images/crops/carrot.jpg'),
+  CropModelShort(uuid: '3', cropName: 'Banana', imagePath: 'assets/images/crops/mattan.jpg'),
+  CropModelShort(uuid: '4', cropName: 'Brinjal', imagePath: 'assets/images/crops/pacha.jpg'),
+  CropModelShort(uuid: '5', cropName: 'Cabbage', imagePath: 'assets/images/crops/qf.jpg'),
+  CropModelShort(uuid: '6', cropName: 'Chilli', imagePath: 'assets/images/crops/tommato.jpg'),
+  CropModelShort(uuid: '7', cropName: 'Barley', imagePath: 'assets/images/crops/tommato.jpg'),
+  CropModelShort(uuid: '8', cropName: 'Bean', imagePath: 'assets/images/crops/ulli.jpg'),
+];
 
 class AddCropCalender extends BaseScreen {
   static String routeName = '/add-crop-calender-screen';
@@ -25,7 +36,7 @@ class AddCropCalender extends BaseScreen {
 
 class _AddCropCalenderState extends State<AddCropCalender> {
   DateTime selectedDate = DateTime.now();
-  String selectedCrops = "";
+  CropModelShort? selectedCrop;
 
   @override
   Widget build(BuildContext context) {
@@ -35,51 +46,45 @@ class _AddCropCalenderState extends State<AddCropCalender> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             20.heightBox,
-            //Create... Text
             CustomText(
               textKey: AppStrings.createYourCropCalender,
               style: AppTextStyle.titleLarge.copyWith(
-                  color: AppColors.primary, fontWeight: FontWeight.w800),
+                color: AppColors.primary,
+                fontWeight: FontWeight.w800,
+              ),
             ),
-
             10.heightBox,
-            //Select your ... Text
             CustomText(
               textKey: AppStrings.selectYourCrop,
               style: AppTextStyle.titleMedium.copyWith(color: AppColors.black),
             ),
+            10.heightBox,
+
+            // Selected Crop Display
+            if (selectedCrop != null) selectedCropWithImage(selectedCrop!),
 
             10.heightBox,
 
-            //Crop
-            selectedCrops != ""
-                ? selectedcropwithimage(selectedCrops)
-                : Container(),
-
-            10.heightBox,
-            //View Other Crops
-            Row(mainAxisSize: MainAxisSize.min, children: [
-              CustomText(
-                textKey: AppStrings.viewOtherCrops,
-                style:
-                    AppTextStyle.bodySmall.copyWith(color: AppColors.primary),
-              ),
-              5.widthBox,
-              const Icon(
-                Icons.arrow_drop_down_sharp,
-              )
-            ]).onInkTap(() {
+            // View Other Crops Button
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomText(
+                  textKey: AppStrings.viewOtherCrops,
+                  style: AppTextStyle.bodySmall.copyWith(color: AppColors.primary),
+                ),
+                5.widthBox,
+                const Icon(Icons.arrow_drop_down_sharp),
+              ],
+            ).onInkTap(() {
               _showCropSelectionBottomSheet(context);
             }),
 
             10.heightBox,
 
-            //Select Crop S... Text
+            // Sowing Date Section
             Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Image.asset(
-                ImageRoutes.calenderIcon,
-                width: 30,
-              ),
+              Image.asset(ImageRoutes.calenderIcon, width: 30),
               5.widthBox,
               CustomText(
                 textKey: AppStrings.selectCropSowingDate,
@@ -87,7 +92,6 @@ class _AddCropCalenderState extends State<AddCropCalender> {
               ),
             ]),
 
-            //Date Picker
             Container(
               margin: const EdgeInsets.all(15.0),
               padding: const EdgeInsets.all(3.0),
@@ -96,12 +100,12 @@ class _AddCropCalenderState extends State<AddCropCalender> {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Text(
-                '${selectedDate.day}|${selectedDate.month}|${selectedDate.year}'
-                    .split(' ')[0],
+                '${selectedDate.day}|${selectedDate.month}|${selectedDate.year}',
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
               ).centered(),
             ).w(width * 0.35).pSymmetric(h: 10).onTap(() {
               _selectDate(context);
@@ -109,35 +113,52 @@ class _AddCropCalenderState extends State<AddCropCalender> {
 
             20.heightBox,
 
-            //Create Button
+            // Create Button
             CustomButtonElevated(
-                    text: AppStrings.createCropCalender,
-                    borderRadius: 5,
-                    onTap: () {})
-                .centered()
-                .pSymmetric(h: width / 5)
+              text: AppStrings.createCropCalender,
+              borderRadius: 5,
+              onTap: () {
+                // Handle submission
+              },
+            ).centered().pSymmetric(h: width / 5),
           ],
         ).pSymmetric(h: 15),
       ),
     );
   }
 
-  //datePicker
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
+  Widget selectedCropWithImage(CropModelShort crop) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipOval(
+              child: Image.asset(
+                crop.imagePath,
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SvgPicture.asset(ImageRoutes.selectedCrop),
+          ],
+        ),
+        5.heightBox,
+        CustomText(
+          textKey: crop.cropName,
+          style: AppTextStyle.bodySmall,
+          color: AppColors.white,
+        )
+            .pSymmetric(v: 3, h: 6)
+            .box
+            .color(AppColors.primary)
+            .withRounded(value: 25)
+            .make(),
+      ],
+    );
   }
 
-  //Select Crop Bottom Sheet
   void _showCropSelectionBottomSheet(BuildContext context) {
     showModalBottomSheet(
       backgroundColor: AppColors.textFieldLintBackground,
@@ -146,115 +167,75 @@ class _AddCropCalenderState extends State<AddCropCalender> {
         return CropSelectionScreen(
           onCropSelected: (crop) {
             setState(() {
-              selectedCrops = crop;
+              selectedCrop = crop;
             });
-            Navigator.pop(context); // Close the bottom sheet
+            Navigator.pop(context);
           },
         );
       },
     );
   }
 
-  Widget selectedcropwithimage(String name) {
-    return //
-        Column(
-      children: [
-        //Crop
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            WidgetHelper().getCircularCachedImage(
-                "https://images.unsplash.com/photo-1511735643442-503bb3bd348a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JvcHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
-                60,
-                60),
-            SvgPicture.asset(ImageRoutes.selectedCrop),
-            // Icon(
-            //   Icons.check,
-            //   color: AppColors.white,
-            // ).circle(radius: 40, backgroundColor: AppColors.transperant, border: Border.all(color: AppColors.white, width: 2)).cornerRadius(50)
-          ],
-        ),
-        5.heightBox,
-        CustomText(
-          textKey: name,
-          style: AppTextStyle.bodySmall,
-          color: AppColors.white,
-        )
-            .pSymmetric(v: 3, h: 6)
-            .box
-            .make()
-            .color(AppColors.primary)
-            .cornerRadius(25),
-      ],
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
     );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 }
 
-class Crop {
-  final String name;
-  Crop(this.name);
-}
-
 class CropSelectionScreen extends StatelessWidget {
-  final Function(String) onCropSelected;
+  final Function(CropModelShort) onCropSelected;
 
-  CropSelectionScreen({
+  const CropSelectionScreen({
     super.key,
     required this.onCropSelected,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-              textKey: AppStrings.selectCrop,
-              style:
-                  AppTextStyle.titleMedium.copyWith(color: AppColors.primary),
-            ),
-            CustomText(
-              textKey: AppStrings.done,
-              style:
-                  AppTextStyle.titleMedium.copyWith(color: AppColors.primary),
-            ),
-          ],
+    return SizedBox(
+      height: 300,
+      child: GridView.builder(
+        padding: const EdgeInsets.all(15),
+        itemCount: allCrops.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 0.75,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
         ),
-        10.heightBox,
-        CustomText(
-          textKey: AppStrings.yourCrops,
-          style: AppTextStyle.bodyLarge
-              .copyWith(fontWeight: FontWeight.w800, color: AppColors.black),
-        ),
-        20.heightBox,
-        CustomText(
-          textKey: AppStrings.othercrops,
-          style: AppTextStyle.bodyLarge.copyWith(
-              fontWeight: FontWeight.w800, color: AppColors.subHeading),
-        ),
-        ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          scrollDirection: Axis.horizontal,
-          itemCount: cropNames.length,
-          itemBuilder: (context, index) {
-            final crop = cropNames[index];
-            return ActionChip(
-                onPressed: () {
-                  onCropSelected(crop);
-                },
-                backgroundColor: AppColors.white,
-                side: BorderSide(color: AppColors.white),
-                label: CustomText(
-                  textKey: crop,
+        itemBuilder: (context, index) {
+          final crop = allCrops[index];
+          return GestureDetector(
+            onTap: () => onCropSelected(crop),
+            child: Column(
+              children: [
+                ClipOval(
+                  child: Image.asset(
+                    crop.imagePath,
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                5.heightBox,
+                CustomText(
+                  textKey: crop.cropName,
                   style: AppTextStyle.bodySmall,
-                )).pSymmetric(h: 3);
-          },
-        ).h(cropNames.length * 10),
-      ],
-    ).p(15);
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
-
-  List<String> cropNames = StoreHelper.store.cropNameList;
 }

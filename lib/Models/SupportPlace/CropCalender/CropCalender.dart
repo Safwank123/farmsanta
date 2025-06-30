@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:intl/intl.dart'; // Required for formatting month names
 
 CropCalendar cropCalendarFromJson(String str) =>
     CropCalendar.fromJson(json.decode(str));
@@ -19,6 +20,14 @@ class CropCalendar {
     this.startDate,
     this.userId,
   });
+
+  /// ✅ Computed month getter from startDate
+  String get month {
+    if (startDate != null) {
+      return DateFormat.MMMM().format(startDate!); // Example: "June"
+    }
+    return 'Unknown';
+  }
 
   factory CropCalendar.fromJson(Map<String, dynamic> json) {
     try {
