@@ -26,7 +26,7 @@ void main() async {
     options: const FirebaseOptions(
       apiKey: "AIzaSyBLd6Ha2VmBSiRqcDvDVllyhRvcGB3X9gU",
       appId: "1:100668233247:android:c936890ed64d28fbe7a72a",
-      messagingSenderId: "", // ⚠️ Consider setting this if using FCM
+      messagingSenderId: "", 
       projectId: "fsfarmer-59779",
     ),
   );

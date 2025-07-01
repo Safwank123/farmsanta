@@ -1,6 +1,11 @@
 
 import 'package:farmsanta_new/Constants/strings.dart';
 import 'package:farmsanta_new/Functions/common.dart';
+import 'package:farmsanta_new/Models/SupportPlace/CropCalender/CropCalender.dart';
+import 'package:farmsanta_new/Models/SupportPlace/CropCalender/StageWeek.dart';
+import 'package:farmsanta_new/Models/SupportPlace/CropCalender/Task.dart';
+// import 'package:farmsanta_new/Models/SupportPlace/CropCalender/calender_stage_model.dart';
+import 'package:farmsanta_new/Models/SupportPlace/CropCalender/CropStageCalendar.dart';
 import 'package:farmsanta_new/Pages/Home/home.dart';
 import 'package:farmsanta_new/Widgets/Widgets/custom_text.dart';
 import 'package:farmsanta_new/Widgets/classes/style_helper.dart';
@@ -138,27 +143,25 @@ class _MenuScreenState extends BaseScreenState<MenuScreen> {
                                   : AppColors.primary,
                             )
                             .cornerRadius(25)
-                            .onInkTap(
-                          () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
-                            if (selectedIndex != 0) {
-                              navigateToPageWithoutReplaceMentNamed(
-                                  navigationString[selectedIndex]);
-                              ZoomDrawer.of(context)!.close();
-                              setState(() {
-                                selectedIndex = 0;
-                              });
-                            } else {
-                              ZoomDrawer.of(context)!.close();
-                            }
-                          },
-                        ),
+                           .onInkTap(
+  () {
+    setState(() => selectedIndex = index);
+
+    // ✅ Custom navigation for Crop Calendar
+    if (index == 3) {
+      goToCropCalendarScreen(context);
+    } else {
+      navigateToPageWithoutReplaceMentNamed(navigationString[index]);
+    }
+
+    ZoomDrawer.of(context)?.close();
+  },
+),
+
                       ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                     );
-                  } else if (index == 11) {
+                  } else if (index == 11) {  
                     return Divider(
                       color: AppColors.background,
                       thickness: 1.5,
@@ -248,4 +251,49 @@ class _MenuScreenState extends BaseScreenState<MenuScreen> {
       ),
     );
   }
+}
+
+void goToCropCalendarScreen(BuildContext context) {
+  final calenderModelList = [
+    CropCalendar(
+      cropId: "1",
+      id: 101,
+      stageId: 501,
+      startDate: DateTime(2025, 1, 1),
+      userId: "user_123",
+    ),
+  ];
+
+  final stageModelList = [
+  [
+    CropStageCalendar(
+      stageName: "Germination",
+      stageWeek: "Week 1",
+      stageList: [
+        StageWeek(
+          tasklist: [
+            Tasklist(
+              oprationType: "Sowing",
+              oprationDescription: "Sow the seeds in well-prepared beds.",
+              taskImages: [
+                "assets/images/crop_calender/pre_seedling_stage.png"
+              ],
+            ),
+          ],
+        ),
+      ],
+    ),
+  ]
+];
+
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => CropCalenderScreen(
+        calenderModelList: calenderModelList,
+        stageModelList: stageModelList,
+      ),
+    ),
+  );
 }
