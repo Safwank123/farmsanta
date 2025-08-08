@@ -80,7 +80,7 @@ class _AddCropCalenderState extends State<AddCropCalender> {
     try {
       final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (picked != null) {
-        // Ensure widget is still mounted before updating state
+        
         if (mounted) {
           setState(() => selectedImage = File(picked.path));
         }
@@ -88,7 +88,7 @@ class _AddCropCalenderState extends State<AddCropCalender> {
     } catch (e) {
       debugPrint("Image pick error: $e");
     } finally {
-      // Ensure widget is still mounted before updating state
+      
       if (mounted) {
         setState(() => _isPickingImage = false);
       }
@@ -102,8 +102,7 @@ class _AddCropCalenderState extends State<AddCropCalender> {
         final pos = await Geolocator.getCurrentPosition();
         List<Placemark> placemarks = await placemarkFromCoordinates(pos.latitude, pos.longitude);
 
-        // --- FIX for setState() called after dispose() ---
-        if (!mounted) return; // Check if the widget is still mounted
+        if (!mounted) return; 
 
         if (placemarks.isNotEmpty) {
           final place = placemarks.first;
@@ -116,13 +115,13 @@ class _AddCropCalenderState extends State<AddCropCalender> {
           });
         }
       } else {
-        // --- FIX for setState() called after dispose() ---
-        if (!mounted) return; // Check if the widget is still mounted
+      
+        if (!mounted) return; 
         setState(() => location = "Permission denied");
       }
     } catch (e) {
-      // --- FIX for setState() called after dispose() ---
-      if (!mounted) return; // Check if the widget is still mounted
+     
+      if (!mounted) return;
       setState(() => location = "Location unavailable");
     }
   }
@@ -303,7 +302,7 @@ class _AddCropCalenderState extends State<AddCropCalender> {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppColors.greenLight, // Lighter background for selected crop
+        color: AppColors.greenLight, 
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.primary),
       ),
@@ -329,7 +328,7 @@ class _AddCropCalenderState extends State<AddCropCalender> {
       backgroundColor: Colors.white,
       context: context,
       builder: (context) => SizedBox(
-        height: 350, // Slightly increased height for better scrollability
+        height: 350,
         child: Column(
           children: [
             Padding(
@@ -353,7 +352,7 @@ class _AddCropCalenderState extends State<AddCropCalender> {
                   final crop = allCrops[index];
                   return GestureDetector(
                     onTap: () {
-                      // Check if the widget is still mounted before updating state
+                    
                       if (mounted) {
                         setState(() => selectedCrop = crop);
                       }

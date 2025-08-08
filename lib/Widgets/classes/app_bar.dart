@@ -52,10 +52,41 @@ class AppBarDesigns {
     return AppBar(
       leading: leading,
       centerTitle: true,
-      title: Image.asset(
-        ImageRoutes.logoColor,
-        width: 140,
+      title:RichText(
+  text: TextSpan(
+    children: [
+      TextSpan(
+        text: 'My ',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
       ),
+      TextSpan(
+        text: 'Farm ',
+        style: TextStyle(
+          color: Colors.orange,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      TextSpan(
+        text: 'App',
+        style: TextStyle(
+          color: Colors.orange,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ],
+  ),
+)
+,
+      // Image.asset(
+      //   ImageRoutes.logoColor,
+      //   width: 140,
+      // ),
       toolbarHeight: height * 0.06,
       bottom: PreferredSize(
         preferredSize: Size(width, height * 0.20),
@@ -75,12 +106,7 @@ class AppBarDesigns {
           ],
         ),
       ),
-      flexibleSpace: SvgPicture.asset(
-        "assets/images/svg/HomeScreenAppbarBackground.svg",
-        height: height,
-        width: width,
-        fit: BoxFit.fitHeight,
-      ),
+      flexibleSpace: Image.asset('assets/images/crops/farm12.jpg',fit: BoxFit.cover,)
     );
   }
 

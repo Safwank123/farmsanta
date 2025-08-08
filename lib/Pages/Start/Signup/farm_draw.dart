@@ -10,6 +10,7 @@ import 'package:farmsanta_new/themeFiles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class FarmDrawScreen extends BaseScreen {
@@ -83,9 +84,21 @@ class _FarmDrawScreenState extends BaseScreenState<FarmDrawScreen> {
                     },
                   ),
                   children: [
+                    // Updated TileLayer with proper user agent
                     TileLayer(
-                      urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.example.farmsanta_new',
                       subdomains: ['a', 'b', 'c'],
+                    ),
+                    
+                    // Attribution (required by OSM)
+                    RichAttributionWidget(
+                      attributions: [
+                        TextSourceAttribution(
+                          'OpenStreetMap contributors',
+                          onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                        )
+                      ],
                     ),
                     
                     // Main land polygon
@@ -192,7 +205,7 @@ class _FarmDrawScreenState extends BaseScreenState<FarmDrawScreen> {
                   ],
                 ),
 
-                // Sub-land name input dialog
+                // Sub-land name input dialog (unchanged)
                 if (showNameDialog)
                   Center(
                     child: Container(
@@ -258,7 +271,7 @@ class _FarmDrawScreenState extends BaseScreenState<FarmDrawScreen> {
                     ),
                   ),
 
-                // Control buttons column
+                // Control buttons column (unchanged)
                 Column(
                   children: [
                     // Main Boundary Button
@@ -380,7 +393,7 @@ class _FarmDrawScreenState extends BaseScreenState<FarmDrawScreen> {
                   ],
                 ),
 
-                // Save Button
+                // Save Button (unchanged)
                 Positioned.fill(
                   child: CustomButtonElevated(
                     text: "Save",
@@ -458,7 +471,7 @@ class _FarmDrawScreenState extends BaseScreenState<FarmDrawScreen> {
     );
   }
 
-  // Calculate font size based on polygon area
+  // Calculate font size based on polygon area (unchanged)
   double _calculateFontSize(List<LatLng> polygon) {
     final area = _calculatePolygonArea(polygon);
     if (area < 0.0001) return 10;  // Very small area
@@ -466,7 +479,7 @@ class _FarmDrawScreenState extends BaseScreenState<FarmDrawScreen> {
     return 14;                      // Normal/large area
   }
 
-  // Simple polygon area calculation (using shoelace formula)
+  // Simple polygon area calculation (using shoelace formula) (unchanged)
   double _calculatePolygonArea(List<LatLng> polygon) {
     if (polygon.length < 3) return 0;
     

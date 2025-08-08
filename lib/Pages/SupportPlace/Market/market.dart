@@ -23,53 +23,62 @@ class _MarketScreenState extends BaseScreenState<MarketScreen> {
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: AppColors.background,
         leading: IconButton(
-          color: Colors.black,
-          icon: const Icon(Icons.arrow_back_ios_new_outlined),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
         ),
         title: CustomText(
           textKey: AppStrings.marketAnalysis,
           color: Colors.black,
-          style: AppTextStyle.titleMedium,
+          style: AppTextStyle.titleLarge.copyWith(fontWeight: FontWeight.bold),
         ),
-        titleSpacing: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            30.heightBox,
+            16.heightBox,
             marketRateBarRow(),
-            25.heightBox,
+            20.heightBox,
             WidgetHelper.searchBarAndTrailingIcon(
-                    hintText: AppStrings.search,
-                    icon: Icon(
-                      Icons.add,
-                      color: AppColors.white,
-                    ),
-                    backgroundColor: AppColors.gray)
-                .pSymmetric(h: 15),
-            25.heightBox,
+              hintText: AppStrings.search,
+              icon: const Icon(Icons.add, color: Colors.white),
+              backgroundColor: AppColors.gray,
+            ).pSymmetric(h: 16),
+            20.heightBox,
             Container(
-                    color: getColor(AppThemeColorsEnum.white),
-                    child: const ProductRateChart().p(hDefaultPadding))
-                .p(hDefaultPadding),
+              decoration: BoxDecoration(
+                color: getColor(AppThemeColorsEnum.white),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: const ProductRateChart().p16(),
+            ).pSymmetric(h: 16),
             25.heightBox,
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.width * 0.1,
-              color: AppColors.gray,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: AppColors.greenLight,
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: CustomText(
-                color: AppColors.subHeading,
-                textKey: 'Current Commodity Rate:',
+                color: AppColors.white,
+                textKey: 'Current Commodity Rate:289',
                 textAlign: TextAlign.start,
-                size: 22,
+                size: 20,
               ),
             ),
+            20.heightBox,
           ],
         ),
       ),
@@ -77,40 +86,43 @@ class _MarketScreenState extends BaseScreenState<MarketScreen> {
   }
 }
 
-//marketrate row
+// Horizontal scrolling market bar row
 SingleChildScrollView marketRateBarRow() {
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
+    padding: EdgeInsets.symmetric(horizontal: hDefaultPadding),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         marketRateBar(
-            marketProduct: 'Dshang-Poivre',
-            xafVal: 'XAF-9000',
-            perNumBasket: 'per 1 Basket',
-            percent: '4%',
-            incresed: true,
-            darkGreen: true),
+          marketProduct: 'Dshang-Poivre',
+          xafVal: 'XAF-9000',
+          perNumBasket: 'per 1 Basket',
+          percent: '4%',
+          incresed: true,
+          darkGreen: true,
+        ),
         marketRateBar(
-            marketProduct: 'Dshang-Poivre',
-            xafVal: 'XAF-9000',
-            perNumBasket: 'per 1 Basket',
-            percent: '4%',
-            incresed: true,
-            darkGreen: false),
+          marketProduct: 'Yaoundé-Tomato',
+          xafVal: 'XAF-7000',
+          perNumBasket: 'per 1 Box',
+          percent: '2%',
+          incresed: false,
+          darkGreen: false,
+        ),
         marketRateBar(
-            marketProduct: 'Dshang-Poivre',
-            xafVal: 'XAF-9000',
-            perNumBasket: 'per 1 Basket',
-            percent: '4%',
-            incresed: true,
-            darkGreen: false),
+          marketProduct: 'Bamenda-Carrot',
+          xafVal: 'XAF-3000',
+          perNumBasket: 'per 1 Kg',
+          percent: '6%',
+          incresed: true,
+          darkGreen: false,
+        ),
       ],
-    ).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
+    ),
   );
 }
 
-//one bar
+// Single market rate bar card
 Widget marketRateBar({
   required String marketProduct,
   required String xafVal,
@@ -119,66 +131,73 @@ Widget marketRateBar({
   required bool incresed,
   required bool darkGreen,
 }) {
+  final Color textColor = darkGreen
+      ? getColor(AppThemeColorsEnum.white)
+      : getColor(AppThemeColorsEnum.primary);
+
+  final Color bgColor = darkGreen
+      ? getColor(AppThemeColorsEnum.primary)
+      : getColor(AppThemeColorsEnum.greenLight);
+
   return Container(
-    decoration: getBoxDecorationAllBorder(
-      30,
-      darkGreen
-          ? getColor(AppThemeColorsEnum.primary)
-          : getColor(AppThemeColorsEnum.greenLight),
-      darkGreen
-          ? getColor(AppThemeColorsEnum.primary)
-          : getColor(AppThemeColorsEnum.primary),
+    margin: const EdgeInsets.only(right: 12),
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+    decoration: BoxDecoration(
+      color: bgColor,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.05),
+          blurRadius: 6,
+          offset: const Offset(0, 2),
+        )
+      ],
     ),
-    child: Row(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-            bold: true,
-            textKey: marketProduct,
-            size: 8,
-            color: darkGreen
-                ? getColor(AppThemeColorsEnum.white)
-                : getColor(AppThemeColorsEnum.primary)),
-        10.widthBox,
+          bold: true,
+          textKey: marketProduct,
+          size: 10,
+          color: textColor,
+        ),
+        4.heightBox,
         CustomText(
-            bold: true,
-            textKey: xafVal,
-            size: 8,
-            color: darkGreen
-                ? getColor(AppThemeColorsEnum.white)
-                : getColor(AppThemeColorsEnum.primary)),
-        10.widthBox,
+          bold: true,
+          textKey: xafVal,
+          size: 10,
+          color: textColor,
+        ),
+        4.heightBox,
         CustomText(
-            bold: true,
-            textKey: perNumBasket,
-            size: 8,
-            color: darkGreen
-                ? getColor(AppThemeColorsEnum.white)
-                : getColor(AppThemeColorsEnum.primary)),
-        10.widthBox,
+          textKey: perNumBasket,
+          size: 9,
+          color: textColor.withOpacity(0.9),
+        ),
+        4.heightBox,
         Row(
           children: [
             Icon(
               incresed ? Icons.arrow_upward : Icons.arrow_downward,
-              color: darkGreen
-                  ? getColor(AppThemeColorsEnum.white)
-                  : getColor(AppThemeColorsEnum.primary),
-              size: 12,
+              color: textColor,
+              size: 14,
             ),
+            4.widthBox,
             CustomText(
-                bold: true,
-                textKey: percent,
-                size: 8,
-                color: darkGreen
-                    ? getColor(AppThemeColorsEnum.white)
-                    : getColor(AppThemeColorsEnum.primary)),
+              textKey: percent,
+              bold: true,
+              size: 9,
+              color: textColor,
+            ),
           ],
         ),
       ],
-    ).pSymmetric(v: 6, h: 12),
-  ).pOnly(right: 12);
+    ),
+  );
 }
 
-//get Color
-Color getColor(AppThemeColorsEnum AppThemeColorsEnum) {
-  return AppThemeColors.getColor(AppThemeColorsEnum);
+// Theme color fetcher
+Color getColor(AppThemeColorsEnum themeColor) {
+  return AppThemeColors.getColor(themeColor);
 }

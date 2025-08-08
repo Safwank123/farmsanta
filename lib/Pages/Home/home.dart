@@ -88,7 +88,7 @@ class _HomeScreenState extends BaseScreenState<HomeScreen>
               buttonColor: _homeTabController.index == 1
                   ? AppThemeColors.getColor(AppThemeColorsEnum.greenDisabled)
                   : AppThemeColors.getColor(AppThemeColorsEnum.primary),
-              imagePath: ImageRoutes.circularLogo,
+             // imagePath: ImageRoutes.circularLogo,
               onTap: () {
                 _homeTabController.animateTo(0);
                 setState(() {});
@@ -102,7 +102,7 @@ class _HomeScreenState extends BaseScreenState<HomeScreen>
               buttonColor: _homeTabController.index == 1
                   ? AppThemeColors.getColor(AppThemeColorsEnum.orange)
                   : AppThemeColors.getColor(AppThemeColorsEnum.orangeDisbled),
-              imagePath: ImageRoutes.circularLogo,
+            //  imagePath: ImageRoutes.circularLogo,
               onTap: () {
                 _homeTabController.animateTo(1);
                 setState(() {});

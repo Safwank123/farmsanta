@@ -81,7 +81,7 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
 
   @override
   Widget buildWidget(BuildContext context) {
-    // REMOVE THE OUTER SingleChildScrollView HERE
+ 
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -102,96 +102,101 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
                 child: _buildDatePicker().pOnly(left: 15, top: 10, bottom: 10),
               ),
             ),
-            // --- Crop Stage Data as Sliver ---
-            _buildSliverStageData(), // Call the new method that returns a Sliver
+            
+            _buildSliverStageData(),
           ],
         ),
       ),
     );
   }
 
-  /// Builds the custom SliverAppBar with a collapsing effect for crop details.
-  SliverAppBar _buildSliverAppBar() {
-    final bool hasCrops = widget.calenderModelList.isNotEmpty;
-    final CropCalendar? selectedCrop = hasCrops ? widget.calenderModelList[selectedIndex] : null;
+ 
+ SliverAppBar _buildSliverAppBar() {
+  final bool hasCrops = widget.calenderModelList.isNotEmpty;
+  final CropCalendar? selectedCrop = hasCrops ? widget.calenderModelList[selectedIndex] : null;
 
-    double expandedHeight = hasCrops ? height * 0.35 : 200;
-    double collapsedHeight = kToolbarHeight + 50;
+  double expandedHeight = hasCrops ? height * 0.35 : 200;
+  double collapsedHeight = kToolbarHeight + 50;
 
-    return SliverAppBar(
-      pinned: true,
-      expandedHeight: expandedHeight,
-      collapsedHeight: collapsedHeight,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.secondary],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          ),
+  return SliverAppBar(
+    pinned: true,
+    expandedHeight: expandedHeight,
+    collapsedHeight: collapsedHeight,
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    flexibleSpace: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [AppColors.primary, AppColors.secondary],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            final double currentHeight = constraints.maxHeight;
-            final bool isCollapsed = currentHeight <= collapsedHeight + 10;
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+      ),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final double currentHeight = constraints.maxHeight;
+          final bool isCollapsed = currentHeight <= collapsedHeight + 10;
 
-            final double opacity = (currentHeight - collapsedHeight) / (expandedHeight - collapsedHeight);
-            final double clampedOpacity = opacity.clamp(0.0, 1.0);
+          final double opacity = (currentHeight - collapsedHeight) / (expandedHeight - collapsedHeight);
+          final double clampedOpacity = opacity.clamp(0.0, 1.0);
 
-            return FlexibleSpaceBar(
-              titlePadding: EdgeInsets.zero,
-              centerTitle: false,
-              title: Padding(
-                padding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: isCollapsed ? kToolbarHeight / 2 - 10 : kToolbarHeight / 2,
-                  bottom: isCollapsed ? 10.0 : 0.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          textKey: AppStrings.cropCalendar,
-                          color: Colors.white,
-                          style: AppTextStyle.titleLarge.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.add_box, color: Colors.white, size: 28),
-                          onPressed: () async {
-                            final CropCalendar? newCalendar = await Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const AddCropCalender()),
-                            ) as CropCalendar?;
+          return FlexibleSpaceBar(
+            titlePadding: EdgeInsets.zero,
+            centerTitle: false,
+            title: Padding(
+              padding: EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: isCollapsed ? kToolbarHeight / 2 - 10 : kToolbarHeight / 2,
+                bottom: isCollapsed ? 10.0 : 0.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        textKey: AppStrings.cropCalendar,
+                        color: Colors.white,
+                        style: AppTextStyle.titleLarge.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.add_box, color: Colors.white, size: 28),
+                        onPressed: () async {
+                          final CropCalendar? newCalendar = await Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const AddCropCalender()),
+                          ) as CropCalendar?;
 
-                            if (newCalendar != null && mounted) {
-                              setState(() {
-                                widget.calenderModelList.add(newCalendar);
-                                widget.stageModelList.add([]);
-                                selectedIndex = widget.calenderModelList.length - 1;
-                                selectedMonth = newCalendar.month;
-                              });
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    if (!isCollapsed)
-                      Expanded(
-                        child: Opacity(
-                          opacity: clampedOpacity,
-                          child: Align(
-                            alignment: Alignment.center,
+                          if (newCalendar != null && mounted) {
+                            setState(() {
+                              widget.calenderModelList.add(newCalendar);
+                              widget.stageModelList.add([]);
+                              selectedIndex = widget.calenderModelList.length - 1;
+                              selectedMonth = newCalendar.month;
+                            });
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  // This is the key area to manage overflow when the app bar collapses.
+                  // We'll use a Flexible widget with FittedBox to prevent overflow
+                  // when space is limited, especially for the crop details.
+                  if (!isCollapsed)
+                    Flexible( // Use Flexible instead of Expanded here
+                      child: Opacity(
+                        opacity: clampedOpacity,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: SingleChildScrollView( // Add SingleChildScrollView
+                            physics: const NeverScrollableScrollPhysics(), // Disable scrolling
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -203,12 +208,15 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
                                     radius: 35,
                                   ),
                                   8.heightBox,
-                                  CustomText(
-                                    textKey: selectedCrop.cropName ?? 'Selected Crop',
-                                    style: AppTextStyle.headlineSmall.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                  FittedBox( // Use FittedBox to prevent overflow for text
+                                    fit: BoxFit.scaleDown,
+                                    child: CustomText(
+                                      textKey: selectedCrop.cropName ?? 'Selected Crop',
+                                      style: AppTextStyle.headlineSmall.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
                                     ),
                                   ),
                                   4.heightBox,
@@ -221,11 +229,14 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
                                           const Icon(Icons.note_alt, size: 16, color: Colors.white),
                                           6.widthBox,
                                           Expanded(
-                                            child: Text(
-                                              selectedCrop.notes!,
-                                              style: AppTextStyle.bodySmall.copyWith(color: Colors.white),
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
+                                            child: FittedBox( // Use FittedBox
+                                              fit: BoxFit.scaleDown,
+                                              child: Text(
+                                                selectedCrop.notes!,
+                                                style: AppTextStyle.bodySmall.copyWith(color: Colors.white),
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -240,11 +251,14 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
                                           const Icon(Icons.location_pin, size: 16, color: Colors.white),
                                           6.widthBox,
                                           Expanded(
-                                            child: Text(
-                                              selectedCrop.location!,
-                                              style: AppTextStyle.bodySmall.copyWith(color: Colors.white),
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
+                                            child: FittedBox( // Use FittedBox
+                                              fit: BoxFit.scaleDown,
+                                              child: Text(
+                                                selectedCrop.location!,
+                                                style: AppTextStyle.bodySmall.copyWith(color: Colors.white),
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -259,10 +273,13 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
                                         const Icon(Icons.info_outline, color: Colors.white, size: 24),
                                         10.widthBox,
                                         Expanded(
-                                          child: Text(
-                                            "No crops added. Tap the ➕ icon to add a crop calendar.",
-                                            style: AppTextStyle.bodyMedium.copyWith(color: Colors.white),
-                                            textAlign: TextAlign.center,
+                                          child: FittedBox( // Use FittedBox
+                                            fit: BoxFit.scaleDown,
+                                            child: Text(
+                                              "No crops added. Tap the ➕ icon to add a crop calendar.",
+                                              style: AppTextStyle.bodyMedium.copyWith(color: Colors.white),
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -273,71 +290,109 @@ class _CropCalenderScreenState extends BaseScreenState<CropCalenderScreen> {
                           ),
                         ),
                       ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  /// Builds the dropdown for selecting a crop/month.
-  Widget _buildDropdown() {
-    if (widget.calenderModelList.isEmpty) {
-      return const SizedBox();
-    }
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.blueDark.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.primary.withOpacity(0.5)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: selectedMonth,
-          icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
-          isExpanded: true,
-          style: AppTextStyle.bodyLarge.copyWith(color: AppColors.primary),
-          dropdownColor: Colors.white,
-          items: widget.calenderModelList.map((calendar) {
-            return DropdownMenuItem(
-              value: calendar.month,
-              child: Row(
-                children: [
-                  Icon(Icons.calendar_today_outlined, size: 18, color: AppColors.primary),
-                  10.widthBox,
-                  Text(calendar.month ?? 'Unknown Month'),
+                    ),
                 ],
               ),
-            );
-          }).toList(),
-          onChanged: (value) {
-            if (value != null) {
-              final index = widget.calenderModelList.indexWhere((c) => c.month == value);
-              if (index != -1) {
-                setState(() {
-                  selectedIndex = index;
-                  selectedMonth = value;
-                });
-              }
-            }
-          },
-        ),
+            ),
+          );
+        },
       ),
-    );
+    ),
+  );
+}
+
+ /// Builds the dropdown for selecting a crop/month.
+Widget _buildDropdown() {
+  if (widget.calenderModelList.isEmpty) {
+    return const SizedBox();
   }
+
+  // Create a unique list of months for the dropdown items.
+  // This prevents the "Two or more DropdownMenuItems with the same value" error.
+  final List<String> uniqueMonths = widget.calenderModelList
+      .map((calendar) => calendar.month)
+      .whereType<String>() // Filter out any null month strings
+      .toSet() // Get only unique month names
+      .toList(); // Convert back to a list
+
+  // Ensure selectedMonth is a valid, unique month from our list.
+  // If the current selectedMonth isn't in the unique list (e.g., due to duplicates being removed),
+  // or if it's null, set it to the first unique month available.
+  if (selectedMonth == null || !uniqueMonths.contains(selectedMonth)) {
+    if (uniqueMonths.isNotEmpty) {
+      selectedMonth = uniqueMonths.first;
+      // Also update selectedIndex to match the newly selected unique month.
+      // We find the first calendar entry that matches this month.
+      selectedIndex = widget.calenderModelList.indexWhere((c) => c.month == selectedMonth);
+      if (selectedIndex == -1) { // Fallback, though it should ideally find a match
+        selectedIndex = 0;
+      }
+    } else {
+      // If uniqueMonths is empty (shouldn't happen if calenderModelList wasn't empty initially),
+      // then there's nothing to select.
+      selectedMonth = null;
+    }
+  }
+
+  // If after all logic, selectedMonth is still null (meaning no valid months to display),
+  // return an empty widget to prevent a crash.
+  if (selectedMonth == null) {
+    return const SizedBox();
+  }
+
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+    decoration: BoxDecoration(
+      color: AppColors.blueDark.withOpacity(0.1),
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: AppColors.primary.withOpacity(0.5)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.08),
+          blurRadius: 8,
+          offset: const Offset(0, 4),
+        ),
+      ],
+    ),
+    child: DropdownButtonHideUnderline(
+      child: DropdownButton<String>(
+        value: selectedMonth,
+        icon: Icon(Icons.arrow_drop_down, color: AppColors.primary),
+        isExpanded: true,
+        style: AppTextStyle.bodyLarge.copyWith(color: AppColors.primary),
+        dropdownColor: Colors.white,
+        // Use the uniqueMonths list to populate the dropdown items
+        items: uniqueMonths.map((monthName) {
+          return DropdownMenuItem(
+            value: monthName,
+            child: Row(
+              children: [
+                Icon(Icons.calendar_today_outlined, size: 18, color: AppColors.primary),
+                10.widthBox,
+                Text(monthName),
+              ],
+            ),
+          );
+        }).toList(),
+        onChanged: (value) {
+          if (value != null) {
+            // When a new month is selected, find the *first* corresponding CropCalendar entry.
+            // If you have multiple entries for the same month and need to differentiate them
+            // in the UI, you might need to adjust your CropCalendar model or dropdown display.
+            final index = widget.calenderModelList.indexWhere((c) => c.month == value);
+            if (index != -1) {
+              setState(() {
+                selectedIndex = index;
+                selectedMonth = value;
+              });
+            }
+          }
+        },
+      ),
+    ),
+  );
+}
 
   /// Builds a card displaying general crop information for the selected month.
   Widget _buildMonthInfo() {

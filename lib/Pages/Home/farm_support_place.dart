@@ -88,40 +88,40 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
           vDefaultPadding.heightBox,
           ...[],
 
-          // Latest Crop Advisories
-          WidgetHelper.getRowIcon(AppStrings.latestCropAdvisories,
-              trailingText: AppStrings.viewmore,
-              color: getColor(AppThemeColorsEnum.subHeading), onClick: () {
-            navigateToPageWithoutReplaceMent(const CropAdvisoryScreen());
-          }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
+          // // Latest Crop Advisories
+          // WidgetHelper.getRowIcon(AppStrings.latestCropAdvisories,
+          //     trailingText: AppStrings.viewmore,
+          //     color: getColor(AppThemeColorsEnum.subHeading), onClick: () {
+          //   navigateToPageWithoutReplaceMent(const CropAdvisoryScreen());
+          // }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
 
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-                children: List.generate(
-                    StoreHelper.store.cropAdvisoriesList.length, (index) {
-              return cropAdvisoriesCardList(
-                      StoreHelper.store.cropAdvisoriesList[index])
-                  .p4();
-            })).pSymmetric(h: hDefaultPadding),
-          ),
-          10.heightBox,
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //       children: List.generate(
+          //           StoreHelper.store.cropAdvisoriesList.length, (index) {
+          //     return cropAdvisoriesCardList(
+          //             StoreHelper.store.cropAdvisoriesList[index])
+          //         .p4();
+          //   })).pSymmetric(h: hDefaultPadding),
+          // ),
+          // 10.heightBox,
 
-          //PoP Card List
-          WidgetHelper.getRowIcon(AppStrings.pop,
-              trailingText: AppStrings.viewmore,
-              color: getColor(AppThemeColorsEnum.subHeading), onClick: () {
-            navigateToPageWithoutReplaceMent(const PopScreen());
-          }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
+          // //PoP Card List
+          // WidgetHelper.getRowIcon(AppStrings.pop,
+          //     trailingText: AppStrings.viewmore,
+          //     color: getColor(AppThemeColorsEnum.subHeading), onClick: () {
+          //   navigateToPageWithoutReplaceMent(const PopScreen());
+          // }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
 
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-                children:
-                    List.generate(StoreHelper.store.popList.length, (index) {
-              return popCardList(StoreHelper.store.popList[index]).p4();
-            })).pSymmetric(h: hDefaultPadding),
-          ),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //       children:
+          //           List.generate(StoreHelper.store.popList.length, (index) {
+          //     return popCardList(StoreHelper.store.popList[index]).p4();
+          //   })).pSymmetric(h: hDefaultPadding),
+          // ),
 
           10.heightBox,
 
@@ -134,41 +134,41 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
               //     color: getColor(AppThemeColorsEnum.primary),
               //     onClick: () {}),
 
-              Container(
-                color: getColor(AppThemeColorsEnum.white),
-                child: Stack(children: [
-                  CustomText(
-                    textKey: "No Market: Data",
-                    color: AppColors.primary,
-                  ).centered(),
-                  Positioned(
-                    top: 5,
-                    right: 5,
-                    child: CustomText(
-                      textKey: "INR / 0kg",
-                      color: AppColors.white,
-                      size: 10,
-                    ).p4().box.make().color(AppColors.primary).cornerRadius(30),
-                  )
-                ]).h(100).w(width * 0.95),
+              // Container(
+              //   color: getColor(AppThemeColorsEnum.white),
+              //   child: Stack(children: [
+              //     CustomText(
+              //       textKey: "No Market: Data",
+              //       color: AppColors.primary,
+              //     ).centered(),
+              //     Positioned(
+              //       top: 5,
+              //       right: 5,
+              //       child: CustomText(
+              //         textKey: "INR / 0kg",
+              //         color: AppColors.white,
+              //         size: 10,
+              //       ).p4().box.make().color(AppColors.primary).cornerRadius(30),
+              //     )
+              //   ]).h(100).w(width * 0.95),
 
-                // const ProductRateChart()
-              ),
+              //   // const ProductRateChart()
+              // ),
 
-              CustomText(
-                textKey: AppStrings.viewmore,
-                color: AppColors.white,
-                size: 10,
-              )
-                  .pSymmetric(h: 34, v: 8)
-                  .box
-                  .make()
-                  .color(AppColors.primary)
-                  .cornerRadius(30)
-                  .p8()
-                  .onTap(() {
-                navigateToPageWithoutReplaceMent(const MarketScreen());
-              }),
+              // CustomText(
+              //   textKey: AppStrings.viewmore,
+              //   color: AppColors.white,
+              //   size: 10,
+              // )
+              //     .pSymmetric(h: 34, v: 8)
+              //     .box
+              //     .make()
+              //     .color(AppColors.primary)
+              //     .cornerRadius(30)
+              //     .p8()
+              //     .onTap(() {
+              //   navigateToPageWithoutReplaceMent(const MarketScreen());
+              // }),
             ],
           )
               .pSymmetric(h: hDefaultPadding)
@@ -178,35 +178,35 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
               .cornerRadius(10),
           10.heightBox,
 
-          // Farmer Queries
-          WidgetHelper.getRowIcon(AppStrings.nearbyRelatedFarmerQueries,
-              trailingText: "",
-              iconData: Icons.arrow_forward_rounded,
-              color: getColor(AppThemeColorsEnum.primary), onClick: () {
-            navigateToPageWithoutReplaceMent(const MyQueriesScreen());
-          }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
+          // // Farmer Queries
+          // WidgetHelper.getRowIcon(AppStrings.nearbyRelatedFarmerQueries,
+          //     trailingText: "",
+          //     iconData: Icons.arrow_forward_rounded,
+          //     color: getColor(AppThemeColorsEnum.primary), onClick: () {
+          //   navigateToPageWithoutReplaceMent(const MyQueriesScreen());
+          // }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
 
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-                children: List.generate(
-                    StoreHelper.store.farmScoutingList.length, (index) {
-              return myQueriesCard(
-                      StoreHelper.store.farmScoutingList[index], true)
-                  .p4();
-            })),
-          ),
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //       children: List.generate(
+          //           StoreHelper.store.farmScoutingList.length, (index) {
+          //     return myQueriesCard(
+          //             StoreHelper.store.farmScoutingList[index], true)
+          //         .p4();
+          //   })),
+          // ),
 
           10.heightBox,
 
-          // Disease and insects cards list
-          WidgetHelper.getRowIcon(AppStrings.diseasesandInsectsinCrops,
-              iconData: Icons.arrow_forward_rounded,
-              color: getColor(AppThemeColorsEnum.primary), onClick: () {
-            StoreHelper.store.selectedCropUuidForDiseaseFromMyCrops =
-                selectedCrop;
-            navigateToPageWithoutReplaceMent(const CropDiseasesPage());
-          }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
+          // // Disease and insects cards list
+          // WidgetHelper.getRowIcon(AppStrings.diseasesandInsectsinCrops,
+          //     iconData: Icons.arrow_forward_rounded,
+          //     color: getColor(AppThemeColorsEnum.primary), onClick: () {
+          //   StoreHelper.store.selectedCropUuidForDiseaseFromMyCrops =
+          //       selectedCrop;
+          //   navigateToPageWithoutReplaceMent(const CropDiseasesPage());
+          // }).pSymmetric(h: hDefaultPadding, v: vDefaultPadding),
 
           VxBuilder(
               builder: (context, store, status) {
@@ -288,31 +288,31 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
               }),
               activityCard(context!,
                   imagePath: ImageRoutes.farmTalks,
-                  title: AppStrings.farmTalks, onTap: () {
+                  title: 'Community', onTap: () {
                 navigateToPageWithoutReplaceMent(const FarmTalk());
               }),
               activityCard(context!,
-                  imagePath: ImageRoutes.pop, title: AppStrings.pop, onTap: () {
+                  imagePath: ImageRoutes.pop, title: 'Knowledgebase', onTap: () {
                 navigateToPageWithoutReplaceMent(const PopScreen());
               }),
               activityCard(context!,
                   imagePath: ImageRoutes.cropAdvisory,
-                  title: AppStrings.cropAdvisory, onTap: () {
+                  title: 'Experts', onTap: () {
                 navigateToPageWithoutReplaceMent(const CropAdvisoryScreen());
               }),
-              activityCard(context!,
-                  imagePath: ImageRoutes.nutrisource,
-                  title: AppStrings.nutrisource, onTap: () {
-                navigateToPageWithoutReplaceMent(const NutriSourceScreen());
-              }),
+              // activityCard(context!,
+              //     imagePath: ImageRoutes.nutrisource,
+              //     title: AppStrings.nutrisource, onTap: () {
+              //   navigateToPageWithoutReplaceMent(const NutriSourceScreen());
+              // }),
               activityCard(context!,
                   imagePath: ImageRoutes.market,
-                  title: AppStrings.market, onTap: () {
+                  title: 'Bazaar', onTap: () {
                 navigateToPageWithoutReplaceMent(const MarketScreen());
               }),
               activityCard(context!,
                   imagePath: ImageRoutes.cropCalendar,
-                  title: AppStrings.cropCalendar, onTap: () {
+                  title: 'Crop Scheduler', onTap: () {
                 navigateToPageWithoutReplaceMent(CropCalenderScreen(
                   stageModelList: [StoreHelper.store.stageCalender],
                   calenderModelList: StoreHelper.store.cropCalender,
@@ -320,7 +320,7 @@ class _FarmSupportPlaceState extends BaseScreenState<FarmSupportPlace> {
               }),
               activityCard(context!,
                   imagePath: ImageRoutes.myCrops,
-                  title: AppStrings.fertilizerCalculator,
+                  title: 'Fertilizer calculator',
                   onTap: () {}),
             ],
           ),

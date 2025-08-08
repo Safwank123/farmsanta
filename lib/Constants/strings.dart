@@ -147,17 +147,17 @@ class AppStrings {
 
   static const String calculateFertilizerDescription =
       'Calculate the right Quantity of Fertilizer your crops need';
-  static const String calculateFertilizer = 'Calculate Fertilizer';
+  static const String calculateFertilizer = 'Fertilizer calculator';
 
   static String askQueries = 'Ask Queries';
   static String myQueries = 'My Queries ';
-  static String farmTalks = 'Farm Talks';
-  static String pop = 'POP';
+  static String farmTalks = 'Community';
+  static String pop = 'Knowledgebase';
   static String nutrisource = 'Nutrisource';
   static String about = "About";
   static String nutrisourceCatalouge = 'Nutri source Catalouge';
-  static String market = 'Market';
-  static String cropCalendar = 'Crop Calendar';
+  static String market = 'Bazaar';
+  static String cropCalendar = 'Crop Scheduler';
 
   static String marketAnalysis = 'Market Analysis';
   static String logout = "Logout";

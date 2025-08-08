@@ -23,7 +23,7 @@ class _AddCropScreenState extends BaseScreenState<AddCropScreen> {
  static const List<CropModelShort> allCrops = [
   CropModelShort(uuid: '1', cropName: 'Almond', imagePath: 'assets/images/crops/avacado.jpg'),
   CropModelShort(uuid: '2', cropName: 'Avocado', imagePath: 'assets/images/crops/carrot.jpg'),
-  CropModelShort(uuid: '3', cropName: 'Banana', imagePath: 'assets/images/crops/mattan.jpg'),
+  CropModelShort(uuid: '3', cropName: 'Pumpkin', imagePath: 'assets/images/crops/mattan.jpg'),
   CropModelShort(uuid: '4', cropName: 'Brinjal', imagePath: 'assets/images/crops/pacha.jpg'),
   CropModelShort(uuid: '5', cropName: 'Cabbage', imagePath: 'assets/images/crops/qf.jpg'),
   CropModelShort(uuid: '6', cropName: 'Chilli', imagePath: 'assets/images/crops/tommato.jpg'),
